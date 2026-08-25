@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { TextReveal } from "@/components/motion/TextReveal";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
-import { ProjectArt } from "@/components/ui/ProjectArt";
+import { ProjectCard } from "@/components/ui/ProjectCard";
 import { CtaCard } from "@/components/sections/CtaCard";
 import { TrustedBy } from "@/components/sections/TrustedBy";
 import { projects } from "@/content/projects";
@@ -35,25 +34,7 @@ export default function ProjectsPage() {
           <RevealGroup className="grid gap-x-8 gap-y-12 md:grid-cols-2">
             {projects.map((project) => (
               <RevealItem key={project.id}>
-                <Link href={`/work/${project.id}`} className="group block">
-                  <div className="overflow-hidden rounded-2xl border border-line bg-surface">
-                    <ProjectArt
-                      tint={project.thumbnail}
-                      className="aspect-[16/11] w-full transition-transform duration-700 ease-out group-hover:scale-[1.04] motion-reduce:transition-none"
-                    />
-                  </div>
-
-                  <div className="mt-5 flex items-start justify-between gap-6">
-                    <div>
-                      <h2 className="text-lg font-semibold">{project.title}</h2>
-                      <p className="mt-1 text-sm text-muted">{project.role}</p>
-                    </div>
-                    <span className="flex shrink-0 items-center gap-1.5 pt-1 text-sm text-subtle transition-colors group-hover:text-text">
-                      <span aria-hidden="true">↗</span>
-                      View Project
-                    </span>
-                  </div>
-                </Link>
+                <ProjectCard project={project} />
               </RevealItem>
             ))}
           </RevealGroup>

@@ -20,7 +20,7 @@ export function Work() {
 
               <RevealGroup>
                 <RevealItem>
-                  <Link href={`/work/${project.id}`} className="group mt-5 flex items-start justify-between gap-6">
+                  <Link href={`/projects/${project.id}`} className="group mt-5 flex items-start justify-between gap-6">
                     <span>
                       <span className="block text-lg font-semibold">{project.title}</span>
                       <span className="mt-1 block text-sm text-muted">{project.role}</span>

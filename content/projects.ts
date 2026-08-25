@@ -7,6 +7,8 @@ export type ProjectLink = { label: string; href: string };
 export type Project = {
   id: string;
   title: string;
+  /** Case-study headline. Rendered two-tone: the first line sits in grey. */
+  headline: [string, string];
   role: string;
   year: string;
   timeline: string;
@@ -27,6 +29,7 @@ export const projects: Project[] = [
   {
     id: "solace",
     title: "Solace",
+    headline: ["Designing calm", "into cash flow."],
     role: "Lead Product Designer",
     year: "2025",
     timeline: "Jan – Jul 2025",
@@ -52,6 +55,7 @@ export const projects: Project[] = [
   {
     id: "fieldnote",
     title: "Fieldnote",
+    headline: ["Research that works", "without a signal."],
     role: "Product Designer",
     year: "2024",
     timeline: "Mar – Aug 2024",
@@ -74,6 +78,7 @@ export const projects: Project[] = [
   {
     id: "vantage",
     title: "Vantage",
+    headline: ["Untangling a decade", "of dashboard debt."],
     role: "Senior UX Designer",
     year: "2024",
     timeline: "Jan – May 2024",
@@ -96,6 +101,7 @@ export const projects: Project[] = [
   {
     id: "haven",
     title: "Haven",
+    headline: ["Habits that reward", "showing up."],
     role: "Product Designer",
     year: "2023",
     timeline: "Feb – Jun 2023",
@@ -117,6 +123,7 @@ export const projects: Project[] = [
   {
     id: "northwind",
     title: "Northwind",
+    headline: ["Rebuilding the last", "step of checkout."],
     role: "UX Designer",
     year: "2023",
     timeline: "Aug – Oct 2023",

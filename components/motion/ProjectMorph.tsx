@@ -185,7 +185,7 @@ export function ProjectMorphProvider({ children }: { children: ReactNode }) {
           {projects.slice(0, MORPH_COUNT).map((project, i) => (
             <Link
               key={project.id}
-              href={`/work/${project.id}`}
+              href={`/projects/${project.id}`}
               ref={(el) => {
                 cardRefs.current[i] = el;
               }}
