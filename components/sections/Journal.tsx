@@ -1,4 +1,4 @@
-import { ScrollWordReveal } from "@/components/motion/ScrollWordReveal";
+import { TextReveal } from "@/components/motion/TextReveal";
 import { RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { posts } from "@/content/site";
 
@@ -14,8 +14,8 @@ export function Journal() {
     <section id="journal" className="border-t border-line py-24 md:py-32">
       <div className="edge-rules relative mx-auto max-w-7xl px-6 md:px-12">
         <div className="flex flex-wrap items-end justify-between gap-6">
-          <ScrollWordReveal
-            lines={["From my journal,", "design insights."]}
+          <TextReveal
+            lines={[{ text: "From my journal,", muted: true }, "design insights."]}
             className="text-display-lg font-display"
           />
           <a href="#journal" className="group inline-flex items-center gap-2 pb-2 text-sm font-medium">

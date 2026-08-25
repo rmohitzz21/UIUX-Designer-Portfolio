@@ -4,9 +4,10 @@ import { motion, type Variants } from "framer-motion";
 import { EASE_REVEAL, STAGGER } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
+// Matches TextReveal: rise out of a soft blur, so blocks and headings share one motion language.
 const variants: Variants = {
-  hidden: (distance: number) => ({ opacity: 0, y: distance }),
-  visible: { opacity: 1, y: 0 },
+  hidden: (distance: number) => ({ opacity: 0, y: distance, filter: "blur(5px)" }),
+  visible: { opacity: 1, y: 0, filter: "blur(0px)" },
 };
 
 type RevealProps = {
@@ -24,8 +25,8 @@ export function Reveal({
   children,
   className,
   delay = 0,
-  duration = 0.9,
-  distance = 24,
+  duration = 0.6,
+  distance = 12,
   as = "div",
 }: RevealProps) {
   const reducedMotion = useReducedMotion();
@@ -51,7 +52,7 @@ export function Reveal({
 }
 
 /** A single item inside a RevealGroup — inherits the "hidden"/"visible" trigger from its parent. */
-export function RevealItem({ children, className, distance = 24, as = "div" }: Omit<RevealProps, "delay">) {
+export function RevealItem({ children, className, distance = 12, as = "div" }: Omit<RevealProps, "delay">) {
   const reducedMotion = useReducedMotion();
   const Component = motion[as];
 
@@ -64,7 +65,7 @@ export function RevealItem({ children, className, distance = 24, as = "div" }: O
       className={className}
       variants={variants}
       custom={distance}
-      transition={{ duration: 0.9, ease: EASE_REVEAL }}
+      transition={{ duration: 0.6, ease: EASE_REVEAL }}
     >
       {children}
     </Component>

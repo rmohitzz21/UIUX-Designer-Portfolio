@@ -35,19 +35,16 @@ export function Nav() {
 
   useEffect(() => {
     function onScroll() {
-      setScrolled((prev) => {
-        const next = window.scrollY > 120;
-        return prev === next ? prev : next;
-      });
+      const next = window.scrollY > 120;
+      // Back at the top the pill is expanded anyway, so drop any manual expansion here
+      // rather than in an effect reacting to `scrolled`.
+      if (!next) setExpanded(false);
+      setScrolled((prev) => (prev === next ? prev : next));
     }
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  useEffect(() => {
-    if (!scrolled) setExpanded(false);
-  }, [scrolled]);
 
   useEffect(() => {
     if (open) lenis?.stop();

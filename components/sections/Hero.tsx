@@ -2,51 +2,15 @@
 
 import { useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform, type MotionValue } from "framer-motion";
+import { TextReveal } from "@/components/motion/TextReveal";
 import { ProjectArt } from "@/components/ui/ProjectArt";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { EASE_REVEAL, STAGGER } from "@/lib/motion";
+import { EASE_REVEAL } from "@/lib/motion";
 import { site, about } from "@/content/site";
 import { projects } from "@/content/projects";
 
 function scrollToId(id: string, reducedMotion: boolean) {
   document.querySelector(id)?.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth" });
-}
-
-/** Two-tone headline: the first line stays grey, the last line lands in black. */
-function Headline({ lines }: { lines: readonly string[] }) {
-  const reducedMotion = useReducedMotion();
-  let wordIndex = 0;
-
-  return (
-    <h1 className="text-hero font-display">
-      {lines.map((line, li) => {
-        const isLast = li === lines.length - 1;
-        const words = line.split(" ");
-        return (
-          <span key={li} className={`block ${isLast ? "text-text" : "text-muted"}`}>
-            {words.map((word, wi) => {
-              const i = wordIndex++;
-              return (
-                <span key={wi} className="inline-block overflow-hidden pb-[0.1em] align-bottom">
-                  <motion.span
-                    className="inline-block"
-                    initial={reducedMotion ? false : { y: "105%", opacity: 0 }}
-                    animate={{ y: "0%", opacity: 1 }}
-                    transition={
-                      reducedMotion ? { duration: 0 } : { duration: 0.8, ease: EASE_REVEAL, delay: 0.1 + i * STAGGER }
-                    }
-                  >
-                    {word}
-                    {wi < words.length - 1 ? " " : ""}
-                  </motion.span>
-                </span>
-              );
-            })}
-          </span>
-        );
-      })}
-    </h1>
-  );
 }
 
 const FAN = [
@@ -163,9 +127,13 @@ export function Hero() {
               {site.availability}
             </motion.span>
 
-            <div className="mt-7">
-              <Headline lines={site.heroLines} />
-            </div>
+            <TextReveal
+              as="h1"
+              lines={[{ text: site.heroLines[0], muted: true }, site.heroLines[1]]}
+              className="mt-7 text-hero font-display"
+              delay={0.1}
+              immediate
+            />
 
             <motion.p {...fade(0.5)} className="mt-6 max-w-md text-lg leading-relaxed text-muted">
               <span className="text-text">{site.heroSubtextLead}</span> {site.heroSubtext}

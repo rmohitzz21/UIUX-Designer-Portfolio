@@ -1,6 +1,6 @@
 "use client";
 
-import { ScrollWordReveal } from "@/components/motion/ScrollWordReveal";
+import { TextReveal } from "@/components/motion/TextReveal";
 import { Reveal } from "@/components/motion/Reveal";
 import { site, about } from "@/content/site";
 
@@ -9,8 +9,8 @@ export function Contact() {
     <section id="contact" className="border-t border-line py-24 md:py-32">
       <div className="edge-rules relative mx-auto max-w-7xl px-6 md:px-12">
         <div className="mx-auto max-w-3xl text-center">
-          <ScrollWordReveal
-            lines={["Still not sure?", "Book a free discovery call."]}
+          <TextReveal
+            lines={[{ text: "Still not sure?", muted: true }, "Book a free discovery call."]}
             className="text-display-lg font-display"
           />
 

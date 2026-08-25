@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { RevealGroup, RevealItem } from "@/components/motion/Reveal";
-import { ScrollWordReveal } from "@/components/motion/ScrollWordReveal";
+import { TextReveal } from "@/components/motion/TextReveal";
 import { ProjectArt } from "@/components/ui/ProjectArt";
 import { projects } from "@/content/projects";
 
@@ -8,7 +8,7 @@ export function Work() {
   return (
     <section id="work" className="border-t border-line py-24 md:py-32">
       <div className="edge-rules relative mx-auto max-w-7xl px-6 md:px-12">
-        <ScrollWordReveal lines={["Latest Projects"]} className="text-display-lg font-display" />
+        <TextReveal lines={["Latest Projects"]} className="text-display-lg font-display" />
 
         <RevealGroup className="mt-14 grid gap-x-8 gap-y-12 md:grid-cols-2">
           {projects.slice(0, 4).map((project) => (

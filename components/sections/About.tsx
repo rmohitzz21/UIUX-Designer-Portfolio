@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ScrollWordReveal } from "@/components/motion/ScrollWordReveal";
+import { TextReveal } from "@/components/motion/TextReveal";
 import { Reveal } from "@/components/motion/Reveal";
 import { PortraitPlaceholder } from "@/components/ui/PortraitPlaceholder";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
@@ -20,8 +20,8 @@ export function About() {
   return (
     <section id="about" className="border-t border-line py-24 md:py-32">
       <div className="edge-rules relative mx-auto max-w-7xl px-6 md:px-12">
-        <ScrollWordReveal
-          lines={["Designing experiences", "that solve real problems."]}
+        <TextReveal
+          lines={[{ text: "Designing experiences", muted: true }, "that solve real problems."]}
           className="text-display-lg font-display"
         />
 
@@ -87,14 +87,10 @@ export function About() {
 
           <div className="flex flex-col gap-6">
             {about.bio.map((paragraph, i) => (
-              <Reveal as="p" key={i} delay={i * 0.08} className="text-lg leading-relaxed text-muted">
-                {paragraph}
-              </Reveal>
+              <TextReveal key={i} as="p" lines={[paragraph]} className="text-lg leading-relaxed text-muted" />
             ))}
 
-            <Reveal as="p" delay={0.2} className="mt-4 text-display font-display">
-              {about.pullQuote}
-            </Reveal>
+            <TextReveal as="p" lines={[about.pullQuote]} className="mt-4 text-display font-display" />
           </div>
         </div>
       </div>

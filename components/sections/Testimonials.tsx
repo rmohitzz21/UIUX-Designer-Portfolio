@@ -1,4 +1,4 @@
-import { ScrollWordReveal } from "@/components/motion/ScrollWordReveal";
+import { TextReveal } from "@/components/motion/TextReveal";
 import { RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { testimonials } from "@/content/testimonials";
 
@@ -6,8 +6,8 @@ export function Testimonials() {
   return (
     <section className="border-t border-line py-24 md:py-32">
       <div className="edge-rules relative mx-auto max-w-7xl px-6 md:px-12">
-        <ScrollWordReveal
-          lines={["Hear what my", "clients have to say."]}
+        <TextReveal
+          lines={[{ text: "Hear what my", muted: true }, "clients have to say."]}
           className="text-display-lg font-display"
         />
 

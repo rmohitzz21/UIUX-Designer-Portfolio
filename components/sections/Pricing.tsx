@@ -1,6 +1,6 @@
 "use client";
 
-import { ScrollWordReveal } from "@/components/motion/ScrollWordReveal";
+import { TextReveal } from "@/components/motion/TextReveal";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { pricingPlans, pricingSteps } from "@/content/site";
@@ -16,8 +16,8 @@ export function Pricing() {
     <section id="pricing" className="border-t border-line py-24 md:py-32">
       <div className="edge-rules relative mx-auto max-w-7xl px-6 md:px-12">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-20">
-          <ScrollWordReveal
-            lines={["Simple pricing.", "Standout designs."]}
+          <TextReveal
+            lines={[{ text: "Simple pricing.", muted: true }, "Standout designs."]}
             className="text-display-lg font-display"
           />
           <Reveal as="div" className="lg:pt-4">

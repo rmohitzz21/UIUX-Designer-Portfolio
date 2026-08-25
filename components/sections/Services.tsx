@@ -1,4 +1,4 @@
-import { ScrollWordReveal } from "@/components/motion/ScrollWordReveal";
+import { TextReveal } from "@/components/motion/TextReveal";
 import { RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { services, servicesHeading, techStack } from "@/content/site";
 
@@ -49,7 +49,10 @@ export function Services() {
       <div className="edge-rules relative mx-auto max-w-7xl px-6 md:px-12">
         <div className="grid gap-14 lg:grid-cols-2 lg:gap-20">
           <div>
-            <ScrollWordReveal lines={servicesHeading} className="text-display-lg font-display" />
+            <TextReveal
+              lines={[{ text: servicesHeading[0], muted: true }, servicesHeading[1], servicesHeading[2]]}
+              className="text-display-lg font-display"
+            />
 
             <div className="mt-14">
               <p className="text-sm text-subtle">My tech stack</p>

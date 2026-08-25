@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ScrollWordReveal } from "@/components/motion/ScrollWordReveal";
+import { TextReveal } from "@/components/motion/TextReveal";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { EASE_REVEAL } from "@/lib/motion";
 import { faqs } from "@/content/site";
@@ -15,7 +15,10 @@ export function Faq() {
     <section id="faq" className="border-t border-line py-24 md:py-32">
       <div className="edge-rules relative mx-auto max-w-7xl px-6 md:px-12">
         <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
-          <ScrollWordReveal lines={["Your questions", "answered."]} className="text-display-lg font-display" />
+          <TextReveal
+            lines={["Your questions", { text: "answered.", muted: true }]}
+            className="text-display-lg font-display"
+          />
 
           <ul className="flex flex-col">
             {faqs.map((faq, i) => {
