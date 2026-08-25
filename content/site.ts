@@ -53,41 +53,59 @@ export const services = [
 export const techStack = ["Figma", "Framer", "Webflow", "Rive", "Blender", "Linear"] as const;
 
 export const pricingSteps = [
-  { number: "01", title: "Subscribe", description: "Pick a plan and get access to your own board the same day." },
-  { number: "02", title: "Request", description: "Queue up as many design requests as you like. I work them one at a time." },
-  { number: "03", title: "Receive", description: "Most requests land back with you inside 48 hours, revised until it's right." },
+  {
+    icon: "repeat",
+    title: "Subscribe",
+    description: "Pick a plan and start queuing requests on your own board the same day.",
+  },
+  {
+    icon: "chat",
+    title: "Request",
+    description: "Ask for anything I offer, from a single landing page to a whole design system.",
+  },
+  {
+    icon: "deliver",
+    title: "Receive",
+    description: "Work comes back inside 48 hours on average, revised until it's right.",
+  },
 ] as const;
+
+/** The tilted black promo card that overlaps the pricing cards. */
+export const pricingPromo = {
+  badge: "Pause or cancel anytime",
+  lead: "Subscription design services",
+  emphasis: "for teams who move fast.",
+  status: "Slots available",
+  title: "Hire me today",
+  description: "Skip the agency markup and work directly with the designer doing the work.",
+} as const;
 
 export const pricingPlans = [
   {
     name: "Unlimited Design",
     price: "$6,500",
-    cadence: "/month",
-    description: "One active request at a time, delivered continuously. Pause or cancel whenever.",
+    cadence: "/ month",
+    descriptionLead: "One flat monthly rate for unlimited design requests.",
+    descriptionRest: "Ideal for ongoing design requirements.",
     features: [
-      "Unlimited design requests",
-      "48-hour average turnaround",
-      "Unlimited revisions",
-      "Design system included",
+      "No contracts or commitments",
+      "Pause or cancel anytime",
+      "Multiple brands",
+      "Unlimited requests",
+      "Avg 48 hour turnaround",
       "Framer & Webflow build-out",
-      "No contracts, cancel anytime",
     ],
-    cta: "Book a call",
+    cta: "Get started",
     featured: true,
   },
   {
     name: "Single Project",
     price: "Custom",
     cadence: "quote",
-    description: "A defined scope with a fixed price and a firm end date. Best for one-off launches.",
-    features: [
-      "Fixed scope and timeline",
-      "Milestone-based delivery",
-      "Two revision rounds",
-      "Handoff documentation",
-      "30 days post-launch support",
-    ],
-    cta: "Request a quote",
+    descriptionLead: "Comprehensive design services for any project scope.",
+    descriptionRest: "Ideal for one-time launches or individual tasks.",
+    features: ["Clearly defined scope", "Fixed timeline", "3 revision rounds", "Milestone updates"],
+    cta: "Get quote",
     featured: false,
   },
 ] as const;
