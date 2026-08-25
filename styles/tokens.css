@@ -1,0 +1,45 @@
+/* Design tokens — see MASTER PROMPT §5. Single source of truth for color, type, spacing. */
+@theme {
+  /* colors — light (default) */
+  --color-bg: #ffffff;
+  --color-surface: #f2eee7;
+  --color-text: #1a1714;
+  --color-muted: #6b6259;
+  --color-accent: #c96f4a;
+  --color-secondary: #8a9b6e;
+
+  /* colors — dark */
+  --color-bg-dark: #16130f;
+  --color-text-dark: #f3efe8;
+
+  /* type */
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --text-hero: clamp(3rem, 8vw, 8rem);
+  --text-hero--line-height: 0.98;
+  --text-hero--letter-spacing: -0.02em;
+
+  --text-display-lg: clamp(2.5rem, 6vw, 5.5rem);
+  --text-display-lg--line-height: 1.02;
+  --text-display-lg--letter-spacing: -0.015em;
+
+  --text-display: clamp(2rem, 4vw, 3.5rem);
+  --text-display--line-height: 1.05;
+  --text-display--letter-spacing: -0.01em;
+
+  /* section numerals — signature detail, §6 */
+  --text-numeral: clamp(4rem, 12vw, 11rem);
+  --text-numeral--line-height: 0.9;
+
+  /* radii */
+  --radius-card: 1.25rem;
+}
+
+:root {
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+}
