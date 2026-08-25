@@ -1,7 +1,7 @@
 import { Reveal } from "@/components/motion/Reveal";
 import { TextReveal } from "@/components/motion/TextReveal";
-import { Marquee } from "@/components/motion/Marquee";
-import { site, trustedBy } from "@/content/site";
+import { ClientLogos } from "@/components/ui/ClientLogos";
+import { site } from "@/content/site";
 
 export function TrustedBy() {
   return (
@@ -19,13 +19,8 @@ export function TrustedBy() {
         </div>
       </div>
 
-      <Marquee duration={30}>
-        {trustedBy.map((name) => (
-          <span key={name} className="mx-10 shrink-0 text-2xl font-medium text-muted md:text-3xl">
-            {name}
-          </span>
-        ))}
-      </Marquee>
+      {/* Reverse direction from the hero strip so the two don't read as the same band scrolling twice. */}
+      <ClientLogos duration={40} reverse />
     </section>
   );
 }

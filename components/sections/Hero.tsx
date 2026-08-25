@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { TextReveal } from "@/components/motion/TextReveal";
 import { HeroMorphSlot } from "@/components/motion/ProjectMorph";
 import { SocialProof } from "@/components/ui/SocialProof";
+import { ClientLogos } from "@/components/ui/ClientLogos";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { EASE_REVEAL } from "@/lib/motion";
 import { site, about } from "@/content/site";
@@ -63,8 +64,9 @@ export function Hero() {
 
       <div className="border-t border-line">
         <div className="edge-rules relative mx-auto max-w-7xl px-6 py-6 md:px-12">
-          <motion.div {...fade(0.8)}>
-            <SocialProof />
+          <motion.div {...fade(0.8)} className="flex flex-col gap-6 md:flex-row md:items-center md:gap-10">
+            <SocialProof className="shrink-0" />
+            <ClientLogos className="min-w-0 flex-1" />
           </motion.div>
         </div>
       </div>
