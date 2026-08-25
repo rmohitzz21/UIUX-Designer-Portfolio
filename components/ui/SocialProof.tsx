@@ -1,18 +1,18 @@
+import Image from "next/image";
 import { site } from "@/content/site";
-
-const FACES = ["JD", "MK", "TW", "RN", "AL"] as const;
 
 /** Avatar stack + rating + client count. Used in the hero and in the CTA card. */
 export function SocialProof({ className, align = "left" }: { className?: string; align?: "left" | "center" }) {
   return (
     <div className={`flex items-center gap-3 ${align === "center" ? "justify-center" : ""} ${className ?? ""}`}>
       <span className="flex -space-x-2.5" aria-hidden="true">
-        {FACES.map((initials) => (
+        {site.clientFaces.map((src, i) => (
           <span
-            key={initials}
-            className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-bg bg-surface text-[10px] font-semibold text-subtle"
+            key={src}
+            className="relative h-9 w-9 overflow-hidden rounded-full border-2 border-bg bg-surface"
+            style={{ zIndex: site.clientFaces.length - i }}
           >
-            {initials}
+            <Image src={src} alt="" fill sizes="36px" className="object-cover" />
           </span>
         ))}
       </span>

@@ -1,10 +1,18 @@
 import type { Metadata } from "next";
+import { Mrs_Saint_Delafield } from "next/font/google";
 import { SmoothScrollProvider } from "@/hooks/useLenis";
 import { Nav } from "@/components/sections/Nav";
 import { Footer } from "@/components/sections/Footer";
 import { CustomCursor } from "@/components/motion/CustomCursor";
 import { site } from "@/content/site";
 import "@/styles/globals.css";
+
+/** Used only for the handwritten signature in the About section. */
+const signature = Mrs_Saint_Delafield({
+  variable: "--font-signature",
+  subsets: ["latin"],
+  weight: "400",
+});
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://ariasen.design";
 
@@ -34,7 +42,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className="h-full antialiased">
+    <html lang="en" className={`${signature.variable} h-full antialiased`}>
       <head>
         <link rel="preconnect" href="https://api.fontshare.com" />
         <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="" />

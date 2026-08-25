@@ -14,6 +14,9 @@ type TextRevealProps = {
   delay?: number;
   /** Play as soon as mounted rather than waiting to scroll into view. */
   immediate?: boolean;
+  /** Flow the lines together as one paragraph instead of stacking them, so a
+   *  `muted` segment can trail a full-colour lead-in on the same line. */
+  inline?: boolean;
 };
 
 // Measured off the reference: words rise 10px, un-blur from 5px, over ~0.6s with a ~45ms stagger.
@@ -31,17 +34,26 @@ function toLine(line: RevealLine) {
  * Word-by-word entrance: each word fades up out of a soft blur, staggered across the block.
  * Lines marked `muted` stay grey — the reference uses that to de-emphasise part of a headline.
  */
-export function TextReveal({ lines, className, as = "h2", delay = 0, immediate = false }: TextRevealProps) {
+export function TextReveal({
+  lines,
+  className,
+  as = "h2",
+  delay = 0,
+  immediate = false,
+  inline = false,
+}: TextRevealProps) {
   const reducedMotion = useReducedMotion();
   const Component = motion[as];
   const parsed = lines.map(toLine);
+  const lineDisplay = inline ? "inline" : "block";
 
   if (reducedMotion) {
     return (
       <Component className={className}>
         {parsed.map((line, i) => (
-          <span key={i} className={`block ${line.muted ? "text-muted" : ""}`}>
+          <span key={i} className={`${lineDisplay} ${line.muted ? "text-muted" : ""}`}>
             {line.text}
+            {inline && i < parsed.length - 1 ? " " : ""}
           </span>
         ))}
       </Component>
@@ -59,7 +71,7 @@ export function TextReveal({ lines, className, as = "h2", delay = 0, immediate =
       {parsed.map((line, li) => {
         const words = line.text.split(" ");
         return (
-          <span key={li} className={`block ${line.muted ? "text-muted" : ""}`}>
+          <span key={li} className={`${lineDisplay} ${line.muted ? "text-muted" : ""}`}>
             {words.map((word, wi) => {
               const i = wordIndex++;
               return (
@@ -70,7 +82,7 @@ export function TextReveal({ lines, className, as = "h2", delay = 0, immediate =
                     transition={{ duration: DURATION, ease: EASE, delay: delay + i * STAGGER }}
                   >
                     {word}
-                    {wi < words.length - 1 ? " " : ""}
+                    {wi < words.length - 1 || (inline && li < parsed.length - 1) ? " " : ""}
                   </motion.span>
                 </span>
               );

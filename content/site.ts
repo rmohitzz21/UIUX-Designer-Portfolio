@@ -13,6 +13,15 @@ export const site = {
   email: "hello@ariasen.design",
   availability: "Available for September '26",
   socialProof: { count: "40+", label: "Happy clients" },
+  /** PLACEHOLDER — stock stand-ins until real photography lands. */
+  photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=900&q=80",
+  clientFaces: [
+    "https://randomuser.me/api/portraits/women/44.jpg",
+    "https://randomuser.me/api/portraits/men/32.jpg",
+    "https://randomuser.me/api/portraits/women/68.jpg",
+    "https://randomuser.me/api/portraits/men/75.jpg",
+    "https://randomuser.me/api/portraits/women/12.jpg",
+  ],
   socials: {
     linkedin: "https://linkedin.com/in/ariasen",
     dribbble: "https://dribbble.com/ariasen",
@@ -134,9 +143,20 @@ export const posts = [
 
 export const about = {
   initials: "AS",
+  /** Each paragraph opens with a full-colour lead, then drops to grey — matching the reference. */
   bio: [
-    "I spent my first year out of school assuming good design meant more polish. It took a founder telling me our onboarding was “beautiful and useless” to learn otherwise.",
-    "Now I start every project by finding the one decision that actually matters, and I'm suspicious of any deliverable that doesn't trace back to it. Outside of work I'm usually failing to finish a puzzle.",
+    {
+      lead: "I love turning tangled problems into something people barely notice.",
+      rest: "It started as a habit of redrawing forms I found annoying, and turned into a career once I realised the redrawing was the easy part.",
+    },
+    {
+      lead: "I focus on interfaces that serve a real purpose —",
+      rest: "not just ones that photograph well. A founder once told me our onboarding was beautiful and useless, and it reset how I work.",
+    },
+    {
+      lead: "I'm a perfectionist about the small stuff,",
+      rest: "but only where it earns its keep. That care is usually why clients come back, and why my scopes tend to shrink rather than grow.",
+    },
   ],
   pullQuote: "The best interface is the one nobody notices.",
 } as const;
