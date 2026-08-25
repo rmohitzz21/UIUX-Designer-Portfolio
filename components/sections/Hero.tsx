@@ -1,109 +1,15 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useMotionValue, useSpring, useTransform, type MotionValue } from "framer-motion";
+import { motion } from "framer-motion";
 import { TextReveal } from "@/components/motion/TextReveal";
-import { ProjectArt } from "@/components/ui/ProjectArt";
+import { HeroMorphSlot } from "@/components/motion/ProjectMorph";
+import { SocialProof } from "@/components/ui/SocialProof";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { EASE_REVEAL } from "@/lib/motion";
 import { site, about } from "@/content/site";
-import { projects } from "@/content/projects";
 
 function scrollToId(id: string, reducedMotion: boolean) {
   document.querySelector(id)?.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth" });
-}
-
-const FAN = [
-  { rotate: -14, x: "-38%", y: "6%", scale: 0.88, depth: 26, z: 1 },
-  { rotate: -7, x: "-19%", y: "-1%", scale: 0.94, depth: 18, z: 2 },
-  { rotate: 7, x: "19%", y: "-3%", scale: 0.97, depth: 14, z: 3 },
-  { rotate: 15, x: "40%", y: "7%", scale: 0.88, depth: 26, z: 1 },
-] as const;
-
-function FanCard({
-  index,
-  tint,
-  px,
-  py,
-}: {
-  index: number;
-  tint: "clay" | "sage" | "dusk" | "sand" | "moss";
-  px: MotionValue<number>;
-  py: MotionValue<number>;
-}) {
-  const reducedMotion = useReducedMotion();
-  const spec = FAN[index];
-  const x = useTransform(px, (v) => v * spec.depth);
-  const y = useTransform(py, (v) => v * spec.depth);
-
-  // Three layers so nothing fights over `transform`: static centring, cursor drift, then the fan pose.
-  return (
-    <div
-      className="absolute top-1/2 left-1/2 aspect-[16/10] w-[62%] -translate-x-1/2 -translate-y-1/2"
-      style={{ zIndex: spec.z }}
-    >
-      <motion.div className="h-full w-full" style={reducedMotion ? undefined : { x, y }}>
-        <motion.div
-          className="h-full w-full overflow-hidden rounded-2xl border border-line bg-surface shadow-2xl"
-          initial={reducedMotion ? false : { opacity: 0, rotate: 0, x: 0, y: "18%", scale: 0.82 }}
-          animate={{ opacity: 1, rotate: spec.rotate, x: spec.x, y: spec.y, scale: spec.scale }}
-          transition={reducedMotion ? { duration: 0 } : { duration: 1, ease: EASE_REVEAL, delay: 0.35 + index * 0.09 }}
-        >
-          <ProjectArt tint={tint} className="h-full w-full" />
-        </motion.div>
-      </motion.div>
-    </div>
-  );
-}
-
-/** Fanned stack of project covers — drifts gently with the cursor. */
-function HeroCardFan() {
-  const reducedMotion = useReducedMotion();
-  const ref = useRef<HTMLDivElement>(null);
-  const rawX = useMotionValue(0);
-  const rawY = useMotionValue(0);
-  const px = useSpring(rawX, { stiffness: 60, damping: 20 });
-  const py = useSpring(rawY, { stiffness: 60, damping: 20 });
-
-  function handlePointerMove(e: React.PointerEvent<HTMLDivElement>) {
-    if (reducedMotion || !ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    rawX.set((e.clientX - rect.left) / rect.width - 0.5);
-    rawY.set((e.clientY - rect.top) / rect.height - 0.5);
-  }
-
-  function handlePointerLeave() {
-    rawX.set(0);
-    rawY.set(0);
-  }
-
-  const covers = projects.slice(0, 4).map((p) => p.cover);
-
-  return (
-    <div
-      ref={ref}
-      onPointerMove={handlePointerMove}
-      onPointerLeave={handlePointerLeave}
-      className="relative aspect-[4/3] w-full"
-      aria-hidden="true"
-    >
-      {covers.map((tint, i) => (
-        <FanCard key={i} index={i} tint={tint} px={px} py={py} />
-      ))}
-    </div>
-  );
-}
-
-function Stars() {
-  return (
-    <span className="flex gap-0.5" aria-hidden="true">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <span key={i} className="text-xs text-text">
-          ★
-        </span>
-      ))}
-    </span>
-  );
 }
 
 export function Hero() {
@@ -151,36 +57,14 @@ export function Hero() {
               <span className="text-sm font-medium">Book a call with me</span>
             </motion.button>
           </div>
-
-          <motion.div
-            initial={reducedMotion ? false : { opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={reducedMotion ? { duration: 0 } : { duration: 0.6, ease: EASE_REVEAL, delay: 0.3 }}
-          >
-            <HeroCardFan />
-          </motion.div>
+          <HeroMorphSlot className="aspect-[4/3] w-full" />
         </div>
       </div>
 
       <div className="border-t border-line">
         <div className="edge-rules relative mx-auto max-w-7xl px-6 py-6 md:px-12">
-          <motion.div {...fade(0.8)} className="flex items-center gap-4">
-            <span className="flex -space-x-2" aria-hidden="true">
-              {["JD", "MK", "TW", "RN", "AL"].map((initials) => (
-                <span
-                  key={initials}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-bg bg-surface text-[10px] font-semibold text-subtle"
-                >
-                  {initials}
-                </span>
-              ))}
-            </span>
-            <span className="flex flex-col">
-              <Stars />
-              <span className="mt-0.5 text-sm text-subtle">
-                {site.socialProof.count} {site.socialProof.label}
-              </span>
-            </span>
+          <motion.div {...fade(0.8)}>
+            <SocialProof />
           </motion.div>
         </div>
       </div>

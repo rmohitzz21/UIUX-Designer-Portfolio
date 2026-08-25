@@ -1,5 +1,6 @@
 import { Hero } from "@/components/sections/Hero";
 import { Work } from "@/components/sections/Work";
+import { ProjectMorphProvider } from "@/components/motion/ProjectMorph";
 import { FeaturedQuote } from "@/components/sections/FeaturedQuote";
 import { Services } from "@/components/sections/Services";
 import { About } from "@/components/sections/About";
@@ -13,8 +14,10 @@ import { Journal } from "@/components/sections/Journal";
 export default function Home() {
   return (
     <main id="top" className="flex flex-1 flex-col">
-      <Hero />
-      <Work />
+      <ProjectMorphProvider>
+        <Hero />
+        <Work />
+      </ProjectMorphProvider>
       <FeaturedQuote />
       <Services />
       <About />
