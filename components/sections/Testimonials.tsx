@@ -1,86 +1,36 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { PortraitPlaceholder } from "@/components/ui/PortraitPlaceholder";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { EASE_REVEAL } from "@/lib/motion";
+import { ScrollWordReveal } from "@/components/motion/ScrollWordReveal";
+import { RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { testimonials } from "@/content/testimonials";
 
-const AUTO_ROTATE_MS = 6000;
-const SWIPE_THRESHOLD = 80;
-
 export function Testimonials() {
-  const [[index, direction], setSlide] = useState<[number, number]>([0, 0]);
-  const [paused, setPaused] = useState(false);
-  const reducedMotion = useReducedMotion();
-
-  const active = testimonials[index];
-
-  function go(step: number) {
-    setSlide(([i]) => [(i + step + testimonials.length) % testimonials.length, step]);
-  }
-
-  useEffect(() => {
-    if (reducedMotion || paused) return;
-    const id = setInterval(() => go(1), AUTO_ROTATE_MS);
-    return () => clearInterval(id);
-  }, [reducedMotion, paused]);
-
   return (
-    <section
-      className="border-y border-text/10 px-8 py-28 md:px-16"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
-      <h2 className="mb-16 text-display-lg font-display font-light">What clients say</h2>
+    <section className="border-t border-line py-24 md:py-32">
+      <div className="edge-rules relative mx-auto max-w-7xl px-6 md:px-12">
+        <ScrollWordReveal
+          lines={["Hear what my", "clients have to say."]}
+          className="text-display-lg font-display"
+        />
 
-      <div className="relative mx-auto max-w-3xl overflow-hidden" aria-live="polite">
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.div
-            key={index}
-            drag={reducedMotion ? false : "x"}
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={0.6}
-            onDragEnd={(_, info) => {
-              if (info.offset.x < -SWIPE_THRESHOLD) go(1);
-              else if (info.offset.x > SWIPE_THRESHOLD) go(-1);
-            }}
-            initial={reducedMotion ? false : { opacity: 0, x: direction >= 0 ? 60 : -60 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={reducedMotion ? undefined : { opacity: 0, x: direction >= 0 ? -60 : 60 }}
-            transition={{ duration: 0.5, ease: EASE_REVEAL }}
-            className="flex cursor-grab flex-col items-center gap-6 text-center active:cursor-grabbing"
-          >
-            <PortraitPlaceholder
-              initials={active.initials}
-              className="h-20 w-20 rounded-full"
-              textClassName="text-xl"
-            />
-            <p className="font-display text-2xl font-light md:text-3xl">&ldquo;{active.quote}&rdquo;</p>
-            <p className="text-sm text-muted">
-              {active.name} · {active.role}, {active.company}
-            </p>
-          </motion.div>
-        </AnimatePresence>
-
-        <div className="mt-10 flex justify-center">
-          {testimonials.map((t, i) => (
-            <button
-              key={t.name}
-              type="button"
-              aria-label={`Show testimonial from ${t.name}`}
-              onClick={() => setSlide([i, i > index ? 1 : -1])}
-              className="flex h-6 w-6 items-center justify-center"
-            >
-              <span
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  i === index ? "w-6 bg-accent" : "w-1.5 bg-text/20"
-                }`}
-              />
-            </button>
+        <RevealGroup className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {testimonials.map((t) => (
+            <RevealItem key={t.name}>
+              <figure className="flex h-full flex-col rounded-2xl border border-line bg-surface p-7">
+                <blockquote className="flex-1 leading-relaxed text-subtle">“{t.quote}”</blockquote>
+                <figcaption className="mt-6 flex items-center gap-3">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-bg text-xs font-semibold text-subtle">
+                    {t.initials}
+                  </span>
+                  <span>
+                    <span className="block text-sm font-semibold">{t.name}</span>
+                    <span className="block text-sm text-muted">
+                      {t.role}, {t.company}
+                    </span>
+                  </span>
+                </figcaption>
+              </figure>
+            </RevealItem>
           ))}
-        </div>
+        </RevealGroup>
       </div>
     </section>
   );

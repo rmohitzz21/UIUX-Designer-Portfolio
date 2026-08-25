@@ -3,25 +3,40 @@
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { site, navLinks } from "@/content/site";
-import { MagneticButton } from "@/components/motion/MagneticButton";
+import { site, navLinks, about } from "@/content/site";
 import { useLenis } from "@/hooks/useLenis";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { EASE_REVEAL } from "@/lib/motion";
 
+function Avatar({ size = 32 }: { size?: number }) {
+  return (
+    <span
+      className="flex shrink-0 items-center justify-center rounded-full bg-text text-[11px] font-semibold text-bg"
+      style={{ width: size, height: size }}
+      aria-hidden="true"
+    >
+      {about.initials}
+    </span>
+  );
+}
+
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   const reducedMotion = useReducedMotion();
   const lenis = useLenis();
   const isHome = usePathname() === "/";
   const router = useRouter();
   const hrefFor = (hash: string) => (isHome ? hash : `/${hash}`);
 
+  // Collapsed only once past the hero, and never while the user has re-expanded it.
+  const collapsed = scrolled && !expanded;
+
   useEffect(() => {
     function onScroll() {
       setScrolled((prev) => {
-        const next = window.scrollY > 80;
+        const next = window.scrollY > 120;
         return prev === next ? prev : next;
       });
     }
@@ -29,6 +44,10 @@ export function Nav() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    if (!scrolled) setExpanded(false);
+  }, [scrolled]);
 
   useEffect(() => {
     if (open) lenis?.stop();
@@ -57,49 +76,86 @@ export function Nav() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-3 z-50 px-4 md:top-5 md:px-8">
-        <div
-          className={`nav-glass relative mx-auto flex max-w-3xl items-center justify-between rounded-full px-4 py-2.5 transition-[background,box-shadow] duration-500 motion-reduce:transition-none md:px-5 md:py-3.5 ${
+      <header className="pointer-events-none fixed inset-x-0 top-4 z-50 flex justify-center px-4 md:top-6">
+        <motion.div
+          layout={!reducedMotion}
+          transition={reducedMotion ? { duration: 0 } : { duration: 0.5, ease: EASE_REVEAL }}
+          onMouseEnter={() => scrolled && setExpanded(true)}
+          className={`nav-glass pointer-events-auto flex items-center gap-3 rounded-full py-2 pr-2 pl-2 md:gap-6 ${
             scrolled ? "nav-glass-scrolled" : ""
           }`}
         >
-          <a href={hrefFor("#top")} className="font-body text-base font-semibold tracking-tight">
-            {site.name}
+          <a href={hrefFor("#top")} className="flex shrink-0 items-center gap-2.5 pl-1">
+            <Avatar />
+            <span className="text-sm font-semibold tracking-tight whitespace-nowrap">{site.name}</span>
           </a>
 
-          <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-6 md:flex">
-            {navLinks.map((link) => (
-              <a key={link.href} href={hrefFor(link.href)} className="group relative text-sm font-medium">
-                {link.label}
-                <span className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-accent transition-transform duration-300 motion-reduce:transition-none group-hover:scale-x-100" />
-              </a>
-            ))}
-          </nav>
+          <AnimatePresence mode="popLayout" initial={false}>
+            {collapsed ? (
+              <motion.button
+                key="dots"
+                type="button"
+                layout={!reducedMotion}
+                initial={reducedMotion ? false : { opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={reducedMotion ? undefined : { opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.25, ease: EASE_REVEAL }}
+                onClick={() => setExpanded(true)}
+                aria-label="Show navigation"
+                className="flex h-9 w-11 items-center justify-center gap-1 rounded-full"
+              >
+                <span className="h-1.5 w-1.5 rounded-full bg-muted" />
+                <span className="h-1.5 w-1.5 rounded-full bg-muted" />
+                <span className="h-1.5 w-1.5 rounded-full bg-muted" />
+              </motion.button>
+            ) : (
+              <motion.div
+                key="links"
+                layout={!reducedMotion}
+                initial={reducedMotion ? false : { opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={reducedMotion ? undefined : { opacity: 0 }}
+                transition={{ duration: 0.3, ease: EASE_REVEAL }}
+                className="flex items-center gap-3 md:gap-6"
+              >
+                <nav className="hidden items-center gap-6 md:flex">
+                  {navLinks.map((link) => (
+                    <a
+                      key={link.href}
+                      href={hrefFor(link.href)}
+                      className="text-sm whitespace-nowrap text-subtle transition-colors hover:text-text"
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </nav>
 
-          <div className="flex items-center gap-3">
-            <MagneticButton
-              className="hidden rounded-full bg-accent px-4 py-1.5 text-sm font-medium text-bg md:inline-flex"
-              onClick={goToContact}
-            >
-              Let&apos;s talk
-            </MagneticButton>
+                <button
+                  type="button"
+                  onClick={goToContact}
+                  className="hidden rounded-full bg-text px-5 py-2.5 text-sm font-medium whitespace-nowrap text-bg transition-opacity hover:opacity-85 md:inline-flex"
+                >
+                  Contact
+                </button>
 
-            <button
-              type="button"
-              className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 md:hidden"
-              aria-label={open ? "Close menu" : "Open menu"}
-              aria-expanded={open}
-              onClick={() => setOpen((v) => !v)}
-            >
-              <span
-                className={`h-px w-5 bg-text transition-transform duration-300 ${open ? "translate-y-[3.5px] rotate-45" : ""}`}
-              />
-              <span
-                className={`h-px w-5 bg-text transition-transform duration-300 ${open ? "-translate-y-[3.5px] -rotate-45" : ""}`}
-              />
-            </button>
-          </div>
-        </div>
+                <button
+                  type="button"
+                  className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 md:hidden"
+                  aria-label={open ? "Close menu" : "Open menu"}
+                  aria-expanded={open}
+                  onClick={() => setOpen((v) => !v)}
+                >
+                  <span
+                    className={`h-px w-5 bg-text transition-transform duration-300 ${open ? "translate-y-[3.5px] rotate-45" : ""}`}
+                  />
+                  <span
+                    className={`h-px w-5 bg-text transition-transform duration-300 ${open ? "-translate-y-[3.5px] -rotate-45" : ""}`}
+                  />
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
       </header>
 
       <AnimatePresence>
@@ -115,16 +171,22 @@ export function Nav() {
               {navLinks.map((link, i) => (
                 <li key={link.href} className="flex items-baseline gap-4">
                   <span className="text-sm text-muted">{String(i + 1).padStart(2, "0")}</span>
-                  <a
-                    href={hrefFor(link.href)}
-                    className="font-body text-4xl font-semibold"
-                    onClick={() => setOpen(false)}
-                  >
+                  <a href={hrefFor(link.href)} className="text-display" onClick={() => setOpen(false)}>
                     {link.label}
                   </a>
                 </li>
               ))}
             </ul>
+            <button
+              type="button"
+              onClick={() => {
+                setOpen(false);
+                goToContact();
+              }}
+              className="mt-12 self-start rounded-full bg-text px-6 py-3 text-sm font-medium text-bg"
+            >
+              Contact
+            </button>
           </motion.div>
         )}
       </AnimatePresence>

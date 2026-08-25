@@ -4,12 +4,15 @@ export const site = {
   role: "Product & UI/UX Designer",
   roles: ["Product Designer", "UI/UX Designer", "Design Systems", "Interaction Design"],
   tagline: "I design digital products that feel inevitable.",
-  heroLines: ["Design that feels", "inevitable."],
+  /** Two-tone headline: first line sits in grey, second lands in black. */
+  heroLines: ["Design that", "feels inevitable."],
+  heroSubtextLead: "Strategic design that earns its keep, not just its likes.",
   heroSubtext:
-    "I'm a product designer who turns ambiguous problems into interfaces people reach for without thinking.",
+    "I build the product surfaces your users reach for without thinking — and the systems that keep them consistent.",
   location: "Brooklyn, NY",
   email: "hello@ariasen.design",
-  availability: "Open to select freelance & full-time roles",
+  availability: "Available for September '26",
+  socialProof: { count: "40+", label: "Happy clients" },
   socials: {
     linkedin: "https://linkedin.com/in/ariasen",
     dribbble: "https://dribbble.com/ariasen",
@@ -22,9 +25,111 @@ export const site = {
 
 export const navLinks = [
   { label: "Work", href: "#work" },
-  { label: "About", href: "#about" },
-  { label: "Process", href: "#process" },
-  { label: "Contact", href: "#contact" },
+  { label: "Services", href: "#services" },
+  { label: "Pricing", href: "#pricing" },
+  { label: "Journal", href: "#journal" },
+] as const;
+
+export const servicesHeading = ["Services that", "supercharge your", "business."] as const;
+
+export const services = [
+  { title: "Product & UI Design", icon: "layout" },
+  { title: "Design Systems", icon: "grid" },
+  { title: "Landing Pages", icon: "window" },
+  { title: "Motion & Interaction", icon: "sparkle" },
+  { title: "Prototyping", icon: "orbit" },
+  { title: "UX Consultation", icon: "panel" },
+] as const;
+
+export const techStack = ["Figma", "Framer", "Webflow", "Rive", "Blender", "Linear"] as const;
+
+export const pricingSteps = [
+  { number: "01", title: "Subscribe", description: "Pick a plan and get access to your own board the same day." },
+  { number: "02", title: "Request", description: "Queue up as many design requests as you like. I work them one at a time." },
+  { number: "03", title: "Receive", description: "Most requests land back with you inside 48 hours, revised until it's right." },
+] as const;
+
+export const pricingPlans = [
+  {
+    name: "Unlimited Design",
+    price: "$6,500",
+    cadence: "/month",
+    description: "One active request at a time, delivered continuously. Pause or cancel whenever.",
+    features: [
+      "Unlimited design requests",
+      "48-hour average turnaround",
+      "Unlimited revisions",
+      "Design system included",
+      "Framer & Webflow build-out",
+      "No contracts, cancel anytime",
+    ],
+    cta: "Book a call",
+    featured: true,
+  },
+  {
+    name: "Single Project",
+    price: "Custom",
+    cadence: "quote",
+    description: "A defined scope with a fixed price and a firm end date. Best for one-off launches.",
+    features: [
+      "Fixed scope and timeline",
+      "Milestone-based delivery",
+      "Two revision rounds",
+      "Handoff documentation",
+      "30 days post-launch support",
+    ],
+    cta: "Request a quote",
+    featured: false,
+  },
+] as const;
+
+export const faqs = [
+  {
+    question: "How long does a typical project take?",
+    answer:
+      "A landing page is usually one to two weeks. A full product surface with a design system runs four to eight, depending on how much research we need up front.",
+  },
+  {
+    question: "Can you work with our existing brand?",
+    answer:
+      "Yes, and I prefer to. I'll audit what you have, keep what's working, and only propose changes where the current system is actively costing you clarity.",
+  },
+  {
+    question: "What makes your process different?",
+    answer:
+      "Every project gets one sentence that defines success. If a screen doesn't serve that sentence it doesn't ship in v1 — which is why my scopes tend to shrink rather than grow.",
+  },
+  {
+    question: "Do you support the work after launch?",
+    answer:
+      "Every engagement includes 30 days of post-launch support. Subscription clients get ongoing iteration as part of the plan.",
+  },
+  {
+    question: "Who owns the work?",
+    answer:
+      "You do, fully, on final payment. Source files, components, and documentation all transfer to you.",
+  },
+] as const;
+
+export const posts = [
+  {
+    title: "How designers and engineers can actually collaborate",
+    date: "2026-03-06",
+    excerpt: "Handoff isn't a document, it's a habit. What changed when I started sitting in on standups.",
+    slug: "designers-and-engineers",
+  },
+  {
+    title: "Why faster isn't always better",
+    date: "2026-04-22",
+    excerpt: "Shipping speed is a proxy metric. Here's what I measure instead when a team feels slow.",
+    slug: "why-faster-isnt-better",
+  },
+  {
+    title: "Designing for human connection",
+    date: "2026-05-01",
+    excerpt: "The interface decisions that make software feel like it was made by people, for people.",
+    slug: "designing-for-connection",
+  },
 ] as const;
 
 export const about = {

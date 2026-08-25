@@ -1,95 +1,47 @@
 "use client";
 
-import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { ScrollWordReveal } from "@/components/motion/ScrollWordReveal";
 import { Reveal } from "@/components/motion/Reveal";
-import { MaskReveal } from "@/components/motion/MaskReveal";
-import { MagneticButton } from "@/components/motion/MagneticButton";
-import { AvailabilityPill } from "@/components/ui/AvailabilityPill";
-import { EASE_REVEAL } from "@/lib/motion";
-import { site } from "@/content/site";
-
-function CopyEmailButton() {
-  const [copied, setCopied] = useState(false);
-
-  async function handleClick() {
-    try {
-      await navigator.clipboard.writeText(site.email);
-    } catch {
-      // clipboard API unavailable — the address is still visible on the button
-    }
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  }
-
-  return (
-    <MagneticButton
-      onClick={handleClick}
-      className="relative overflow-hidden rounded-full bg-accent px-10 py-5 text-lg font-medium text-bg"
-    >
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.span
-          key={copied ? "copied" : "email"}
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: -20, opacity: 0 }}
-          transition={{ duration: 0.3, ease: EASE_REVEAL }}
-          className="block"
-        >
-          {copied ? "Copied to clipboard ✓" : site.email}
-        </motion.span>
-      </AnimatePresence>
-    </MagneticButton>
-  );
-}
+import { site, about } from "@/content/site";
 
 export function Contact() {
   return (
-    <section id="contact" className="px-8 py-32 md:px-16">
-      <div className="flex flex-col items-center gap-8 text-center">
-        <Reveal as="div">
-          <AvailabilityPill />
-        </Reveal>
+    <section id="contact" className="border-t border-line py-24 md:py-32">
+      <div className="edge-rules relative mx-auto max-w-7xl px-6 md:px-12">
+        <div className="mx-auto max-w-3xl text-center">
+          <ScrollWordReveal
+            lines={["Still not sure?", "Book a free discovery call."]}
+            className="text-display-lg font-display"
+          />
 
-        <MaskReveal as="h2" lines={site.contactLines} className="text-hero font-display font-light" />
+          <Reveal as="p" delay={0.1} className="mx-auto mt-6 max-w-lg text-lg text-muted">
+            {site.contactSubtext}
+          </Reveal>
 
-        <Reveal as="p" delay={0.3} className="max-w-md text-lg text-muted">
-          {site.contactSubtext}
-        </Reveal>
+          <Reveal as="div" delay={0.2} className="mt-10 flex flex-wrap items-center justify-center gap-4">
+            <a
+              href={`mailto:${site.email}`}
+              className="inline-flex items-center gap-2.5 rounded-full bg-text py-2 pr-6 pl-2 text-bg transition-opacity hover:opacity-85"
+            >
+              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-bg text-[11px] font-semibold text-text">
+                {about.initials}
+              </span>
+              <span className="text-sm font-medium">Schedule now</span>
+            </a>
 
-        <Reveal as="div" delay={0.4} className="mt-4">
-          <CopyEmailButton />
-        </Reveal>
+            <a
+              href={`mailto:${site.email}`}
+              className="rounded-full border border-line bg-surface px-6 py-3.5 text-sm font-medium transition-colors hover:border-text/25"
+            >
+              {site.email}
+            </a>
+          </Reveal>
 
-        <Reveal as="div" delay={0.5} className="mt-6 flex flex-wrap items-center justify-center gap-6 text-sm">
-          <a
-            href={site.socials.linkedin}
-            target="_blank"
-            rel="noreferrer"
-            className="underline-offset-4 hover:underline"
-          >
-            LinkedIn
-          </a>
-          <a
-            href={site.socials.dribbble}
-            target="_blank"
-            rel="noreferrer"
-            className="underline-offset-4 hover:underline"
-          >
-            Dribbble
-          </a>
-          <a
-            href={site.socials.instagram}
-            target="_blank"
-            rel="noreferrer"
-            className="underline-offset-4 hover:underline"
-          >
-            Instagram
-          </a>
-          <a href={site.socials.resume} target="_blank" rel="noreferrer" className="underline-offset-4 hover:underline">
-            Resume
-          </a>
-        </Reveal>
+          <Reveal as="p" delay={0.3} className="mt-8 inline-flex items-center gap-2 text-sm text-muted">
+            <span className="h-2 w-2 rounded-full bg-secondary" />
+            {site.availability}
+          </Reveal>
+        </div>
       </div>
     </section>
   );

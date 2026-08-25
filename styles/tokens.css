@@ -1,34 +1,37 @@
-/* Design tokens — see MASTER PROMPT §5. Single source of truth for color, type, spacing. */
+/* Design tokens — single source of truth for color, type, spacing.
+   Palette/type matched to the LaunchFolio reference: near-white page, pure-black type,
+   a single mid-grey for de-emphasis, white cards, black pill buttons. */
 @theme {
   /* colors — light (default) */
-  --color-bg: #ffffff;
-  --color-surface: #f2eee7;
-  --color-text: #1a1714;
-  --color-muted: #6b6259;
-  --color-accent: #c96f4a;
-  --color-secondary: #8a9b6e;
+  --color-bg: #fafafa;
+  --color-surface: #ffffff;
+  --color-text: #000000;
+  --color-muted: #828282;
+  --color-subtle: #545454;
+  --color-line: #e8e8e8;
+  --color-accent: #000000;
+  --color-secondary: #12b33f;
 
   /* colors — dark */
-  --color-bg-dark: #16130f;
-  --color-text-dark: #f3efe8;
+  --color-bg-dark: #0d0d0d;
+  --color-text-dark: #fafafa;
 
-  /* type */
-  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
-  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  /* type — Switzer throughout, weight 500, tight tracking (-0.03em) */
+  --font-display: var(--font-switzer), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-switzer), ui-sans-serif, system-ui, sans-serif;
 
-  --text-hero: clamp(3rem, 8vw, 8rem);
-  --text-hero--line-height: 0.98;
-  --text-hero--letter-spacing: -0.02em;
+  --text-hero: clamp(2.75rem, 6vw, 4.5rem);
+  --text-hero--line-height: 0.95;
+  --text-hero--letter-spacing: -0.03em;
 
-  --text-display-lg: clamp(2.5rem, 6vw, 5.5rem);
-  --text-display-lg--line-height: 1.02;
-  --text-display-lg--letter-spacing: -0.015em;
+  --text-display-lg: clamp(2.25rem, 5.2vw, 4rem);
+  --text-display-lg--line-height: 1;
+  --text-display-lg--letter-spacing: -0.03em;
 
-  --text-display: clamp(2rem, 4vw, 3.5rem);
-  --text-display--line-height: 1.05;
-  --text-display--letter-spacing: -0.01em;
+  --text-display: clamp(1.5rem, 2.6vw, 2rem);
+  --text-display--line-height: 1.15;
+  --text-display--letter-spacing: -0.03em;
 
-  /* section numerals — signature detail, §6 */
   --text-numeral: clamp(4rem, 12vw, 11rem);
   --text-numeral--line-height: 0.9;
 

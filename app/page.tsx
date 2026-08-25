@@ -1,27 +1,29 @@
 import { Hero } from "@/components/sections/Hero";
-import { TrustedBy } from "@/components/sections/TrustedBy";
 import { Work } from "@/components/sections/Work";
+import { FeaturedQuote } from "@/components/sections/FeaturedQuote";
+import { Services } from "@/components/sections/Services";
 import { About } from "@/components/sections/About";
-import { Stats } from "@/components/sections/Stats";
-import { Experience } from "@/components/sections/Experience";
-import { Skills } from "@/components/sections/Skills";
-import { Process } from "@/components/sections/Process";
+import { Pricing } from "@/components/sections/Pricing";
+import { TrustedBy } from "@/components/sections/TrustedBy";
 import { Testimonials } from "@/components/sections/Testimonials";
+import { Faq } from "@/components/sections/Faq";
 import { Contact } from "@/components/sections/Contact";
+import { Journal } from "@/components/sections/Journal";
 
 export default function Home() {
   return (
     <main id="top" className="flex flex-1 flex-col">
       <Hero />
-      <TrustedBy />
       <Work />
+      <FeaturedQuote />
+      <Services />
       <About />
-      <Stats />
-      <Experience />
-      <Skills />
-      <Process />
+      <Pricing />
+      <TrustedBy />
       <Testimonials />
+      <Faq />
       <Contact />
+      <Journal />
     </main>
   );
 }
