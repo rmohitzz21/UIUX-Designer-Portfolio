@@ -21,9 +21,8 @@ function Avatar({ size = 32 }: { size?: number }) {
 }
 
 export function Nav() {
-  const [scrolled, setScrolled] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
   const [open, setOpen] = useState(false);
-  const [expanded, setExpanded] = useState(false);
   const reducedMotion = useReducedMotion();
   const lenis = useLenis();
   const isHome = usePathname() === "/";
@@ -31,18 +30,19 @@ export function Nav() {
   const hrefFor = (href: string) =>
     href.startsWith("/") ? href : isHome ? href : `/${href}`;
 
-  // Collapsed only once past the hero, and never while the user has re-expanded it.
-  const collapsed = scrolled && !expanded;
-
+  // Collapse to the dots on the way down, bring the links back on the way up.
   useEffect(() => {
+    let lastY = window.scrollY;
+
     function onScroll() {
-      const next = window.scrollY > 120;
-      // Back at the top the pill is expanded anyway, so drop any manual expansion here
-      // rather than in an effect reacting to `scrolled`.
-      if (!next) setExpanded(false);
-      setScrolled((prev) => (prev === next ? prev : next));
+      const y = window.scrollY;
+      const delta = y - lastY;
+      // Ignore sub-pixel jitter and rubber-banding so the pill doesn't flicker.
+      if (Math.abs(delta) < 6) return;
+      lastY = y;
+      setCollapsed(y > 140 && delta > 0);
     }
-    onScroll();
+
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -78,10 +78,7 @@ export function Nav() {
         <motion.div
           layout={!reducedMotion}
           transition={reducedMotion ? { duration: 0 } : { duration: 0.5, ease: EASE_REVEAL }}
-          onMouseEnter={() => scrolled && setExpanded(true)}
-          className={`nav-glass pointer-events-auto flex items-center gap-3 rounded-full py-2 pr-2 pl-2 md:gap-6 ${
-            scrolled ? "nav-glass-scrolled" : ""
-          }`}
+          className="nav-glass pointer-events-auto flex items-center gap-3 py-2 pr-2 pl-2 md:gap-6"
         >
           <a href={hrefFor("#top")} className="flex shrink-0 items-center gap-2.5 pl-1">
             <Avatar />
@@ -98,13 +95,13 @@ export function Nav() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={reducedMotion ? undefined : { opacity: 0, scale: 0.8 }}
                 transition={{ duration: 0.25, ease: EASE_REVEAL }}
-                onClick={() => setExpanded(true)}
+                onClick={() => setCollapsed(false)}
                 aria-label="Show navigation"
-                className="flex h-9 w-11 items-center justify-center gap-1 rounded-full"
+                className="flex h-9 w-11 items-center justify-center gap-1.5 rounded-full"
               >
-                <span className="h-1.5 w-1.5 rounded-full bg-muted" />
-                <span className="h-1.5 w-1.5 rounded-full bg-muted" />
-                <span className="h-1.5 w-1.5 rounded-full bg-muted" />
+                <span className="h-[6px] w-[6px] rounded-full bg-muted" />
+                <span className="h-[6px] w-[6px] rounded-full bg-muted" />
+                <span className="h-[6px] w-[6px] rounded-full bg-muted" />
               </motion.button>
             ) : (
               <motion.div
