@@ -1,19 +1,22 @@
 import { TextReveal } from "@/components/motion/TextReveal";
+import { ClientLogos } from "@/components/ui/ClientLogos";
 
 /**
- * A slim divider band carrying nothing but the two-tone wordmark, matching the reference —
- * measured there at 99px tall with no logos inside.
+ * Slim divider band. The reference keeps the right-hand side empty; the client marquee sits
+ * there instead so the band stays the same height rather than growing a second row.
  */
 export function TrustedBy() {
   return (
     <section aria-label="Trusted by" className="border-t border-line py-8">
-      <div className="relative mx-auto max-w-7xl px-6 md:px-12">
+      <div className="relative mx-auto flex max-w-7xl flex-col gap-5 px-6 md:flex-row md:items-center md:gap-12 md:px-12">
         <TextReveal
           as="p"
           inline
           lines={[{ text: "Trusted by", muted: true }, "many"]}
-          className="text-2xl font-semibold tracking-tight"
+          className="shrink-0 text-2xl font-semibold tracking-tight"
         />
+
+        <ClientLogos className="min-w-0 flex-1" duration={40} reverse />
       </div>
     </section>
   );
