@@ -142,20 +142,27 @@ export const posts = [
   {
     title: "How designers and engineers can actually collaborate",
     date: "2026-03-06",
-    excerpt: "Handoff isn't a document, it's a habit. What changed when I started sitting in on standups.",
+    excerpt:
+      "Handoff isn't a document, it's a habit. What changed for us when I stopped throwing files over the wall and started sitting in on standups.",
     slug: "designers-and-engineers",
+    /** PLACEHOLDER — stock stand-in until real article art lands. */
+    cover: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1200&q=80",
   },
   {
     title: "Why faster isn't always better",
     date: "2026-04-22",
-    excerpt: "Shipping speed is a proxy metric. Here's what I measure instead when a team feels slow.",
+    excerpt:
+      "Shipping speed is a proxy metric. Here's what I measure instead when a team says it feels slow, and why the answer is rarely more velocity.",
     slug: "why-faster-isnt-better",
+    cover: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=1200&q=80",
   },
   {
     title: "Designing for human connection",
     date: "2026-05-01",
-    excerpt: "The interface decisions that make software feel like it was made by people, for people.",
+    excerpt:
+      "The small interface decisions that make software feel like it was made by people, for people — and the ones that quietly undo that.",
     slug: "designing-for-connection",
+    cover: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&q=80",
   },
 ] as const;
 
