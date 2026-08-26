@@ -7,7 +7,8 @@ import { site, navLinks } from "@/content/site";
 
 export function Footer() {
   const isHome = usePathname() === "/";
-  const hrefFor = (hash: string) => (isHome ? hash : `/${hash}`);
+  const hrefFor = (href: string) =>
+    href.startsWith("/") ? href : isHome ? href : `/${href}`;
 
   return (
     <footer className="relative z-10 overflow-hidden bg-text text-bg">

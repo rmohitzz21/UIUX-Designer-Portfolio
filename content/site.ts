@@ -33,10 +33,10 @@ export const site = {
 } as const;
 
 export const navLinks = [
-  { label: "Work", href: "#work" },
+  { label: "Work", href: "/projects" },
   { label: "Services", href: "#services" },
   { label: "Pricing", href: "#pricing" },
-  { label: "Journal", href: "#journal" },
+  { label: "Journal", href: "/journal" },
 ] as const;
 
 export const servicesHeading = ["Services that", "supercharge your", "business."] as const;
@@ -138,31 +138,85 @@ export const faqs = [
   },
 ] as const;
 
+export const journalIntro = {
+  heading: ["My design insights &", "creative resources"],
+  blurb:
+    "A collection of pieces on design practice, process and the decisions behind the work. Written for the people who have to live with the results.",
+} as const;
+
+export const postCategories = ["Process", "Craft", "Strategy"] as const;
+
 export const posts = [
   {
     title: "How designers and engineers can actually collaborate",
     date: "2026-03-06",
+    category: "Process",
     excerpt:
       "Handoff isn't a document, it's a habit. What changed for us when I stopped throwing files over the wall and started sitting in on standups.",
     slug: "designers-and-engineers",
     /** PLACEHOLDER — stock stand-in until real article art lands. */
     cover: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1200&q=80",
+    body: [
+      "For most of my first two years I treated handoff as a delivery problem. Tidier files, better annotations, a longer spec. None of it moved the needle, because the gap was never about documentation — it was about the fact that engineers were meeting my decisions for the first time after they were already final.",
+      "The change was unglamorous. I started going to standup. Not to present anything, just to hear what was hard that week. Within a month I was designing around constraints I'd previously have discovered in a review, and the review itself stopped being adversarial.",
+      "If your handoff feels heavy, the document usually isn't the problem. Ask when the engineers first see the work, and how much of it is still negotiable at that point.",
+    ],
   },
   {
     title: "Why faster isn't always better",
     date: "2026-04-22",
+    category: "Process",
     excerpt:
       "Shipping speed is a proxy metric. Here's what I measure instead when a team says it feels slow, and why the answer is rarely more velocity.",
     slug: "why-faster-isnt-better",
     cover: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=1200&q=80",
+    body: [
+      "Every team that tells me they're slow is measuring cycle time. Almost none of them are measuring rework — how often a shipped thing comes back within a quarter because it didn't do what anyone actually needed.",
+      "Rework is where the time goes. A team that ships in three days and revisits the same surface four times has spent longer than one that took two weeks and got it right, and it has spent that time in the most demoralising way possible.",
+      "So when someone asks me to make design faster, my first question is what fraction of last quarter's work is still standing. If it's low, speed isn't the constraint.",
+    ],
   },
   {
     title: "Designing for human connection",
     date: "2026-05-01",
+    category: "Craft",
     excerpt:
       "The small interface decisions that make software feel like it was made by people, for people — and the ones that quietly undo that.",
     slug: "designing-for-connection",
     cover: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&q=80",
+    body: [
+      "Warmth in an interface is rarely the illustration or the rounded corner. It's whether the product seems to understand what you were trying to do when something went wrong.",
+      "An error state that names the actual problem, a confirmation that tells you what will happen next, an empty state that assumes you're capable — these read as care because they cost someone thought.",
+      "The inverse is just as legible. Every cheerful microcopy line sitting on top of a dead end reads as a company that had budget for tone but not for the fix.",
+    ],
+  },
+  {
+    title: "Beyond minimalism: what comes next",
+    date: "2026-06-11",
+    category: "Craft",
+    excerpt:
+      "Stripping things back stopped being a differentiator a decade ago. What's left when everyone's interface is already clean?",
+    slug: "beyond-minimalism",
+    cover: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=1200&q=80",
+    body: [
+      "Minimalism won so completely that it stopped saying anything. When every product is a white page with a sans-serif and generous spacing, restraint is no longer a signal — it's the floor.",
+      "What reads as considered now is specificity: interfaces that look like they were built for one job rather than adapted from a template. That usually means more opinion, not less.",
+      "This isn't an argument for decoration. It's an argument for the parts of a product that couldn't belong to anyone else.",
+    ],
+  },
+  {
+    title: "When to rebrand, and when not to",
+    date: "2026-07-03",
+    category: "Strategy",
+    excerpt:
+      "Most rebrands solve a problem the brand didn't have. A short list of the signals that actually justify one.",
+    slug: "when-to-rebrand",
+    cover: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1200&q=80",
+    body: [
+      "A rebrand is worth it when the identity is actively misrepresenting the company — when you've moved market, merged, or the name is doing damage. Those are structural problems and a new mark genuinely helps.",
+      "It is not worth it when leadership is bored, when a competitor shipped something nice, or when the real issue is that the product is hard to use. New colours will not fix a broken onboarding flow, and shipping them buys about a quarter of internal goodwill.",
+      "The cheapest test I know: write down what will be measurably different in six months. If the list is all adjectives, don't do it.",
+    ],
   },
 ] as const;
 

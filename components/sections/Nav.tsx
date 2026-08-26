@@ -28,7 +28,8 @@ export function Nav() {
   const lenis = useLenis();
   const isHome = usePathname() === "/";
   const router = useRouter();
-  const hrefFor = (hash: string) => (isHome ? hash : `/${hash}`);
+  const hrefFor = (href: string) =>
+    href.startsWith("/") ? href : isHome ? href : `/${href}`;
 
   // Collapsed only once past the hero, and never while the user has re-expanded it.
   const collapsed = scrolled && !expanded;
