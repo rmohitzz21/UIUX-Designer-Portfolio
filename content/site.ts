@@ -1,6 +1,6 @@
 // DUMMY CONTENT — replace with real copy before launch.
 export const site = {
-  name: "Aria Sen",
+  name: "Zula Prajapati",
   role: "Product & UI/UX Designer",
   roles: ["Product Designer", "UI/UX Designer", "Design Systems", "Interaction Design"],
   tagline: "I design digital products that feel inevitable.",
@@ -10,7 +10,7 @@ export const site = {
   heroSubtext:
     "I build the product surfaces your users reach for without thinking — and the systems that keep them consistent.",
   location: "Brooklyn, NY",
-  email: "hello@ariasen.design",
+  email: "hello@zulaprajapati.design",
   availability: "Available for September '26",
   socialProof: { count: "40+", label: "Happy clients" },
   /** PLACEHOLDER — stock stand-ins until real photography lands. */
@@ -23,10 +23,10 @@ export const site = {
     "https://randomuser.me/api/portraits/women/12.jpg",
   ],
   socials: {
-    linkedin: "https://linkedin.com/in/ariasen",
-    dribbble: "https://dribbble.com/ariasen",
-    instagram: "https://instagram.com/ariasen.design",
-    resume: "/aria-sen-resume.pdf",
+    linkedin: "https://linkedin.com/in/zulaprajapati",
+    dribbble: "https://dribbble.com/zulaprajapati",
+    instagram: "https://instagram.com/zulaprajapati.design",
+    resume: "/zula-prajapati-resume.pdf",
   },
   contactLines: ["Let's build something", "worth using."],
   contactSubtext: "Have a project in mind, or just want to talk shop? My inbox is open.",
@@ -221,7 +221,7 @@ export const posts = [
 ] as const;
 
 export const about = {
-  initials: "AS",
+  initials: "ZP",
   /** Each paragraph opens with a full-colour lead, then drops to grey — matching the reference. */
   bio: [
     {

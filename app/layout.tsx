@@ -13,7 +13,7 @@ const signature = Mrs_Saint_Delafield({
   weight: "400",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://ariasen.design";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zulaprajapati.design";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

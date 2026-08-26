@@ -14,7 +14,7 @@ export type Testimonial = {
 export const testimonials: Testimonial[] = [
   {
     quote:
-      "Aria has this rare ability to make a complicated system feel obvious in hindsight. Our onboarding numbers still haven't come back down.",
+      "Zula has this rare ability to make a complicated system feel obvious in hindsight. Our onboarding numbers still haven't come back down.",
     highlight: "make a complicated system feel obvious in hindsight",
     name: "Priya Nathan",
     role: "Co-founder",
@@ -54,7 +54,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     quote:
-      "Our design system used to be a folder of guesses. Aria turned it into something the engineers actually reach for.",
+      "Our design system used to be a folder of guesses. Zula turned it into something the engineers actually reach for.",
     highlight: "something the engineers actually reach for",
     name: "Elena Rossi",
     role: "Engineering Manager",
