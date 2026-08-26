@@ -8,7 +8,6 @@ import { Pricing } from "@/components/sections/Pricing";
 import { TrustedBy } from "@/components/sections/TrustedBy";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { Faq } from "@/components/sections/Faq";
-import { Contact } from "@/components/sections/Contact";
 import { Journal } from "@/components/sections/Journal";
 
 export default function Home() {
@@ -25,7 +24,6 @@ export default function Home() {
       <TrustedBy />
       <Testimonials />
       <Faq />
-      <Contact />
       <Journal />
     </main>
   );
