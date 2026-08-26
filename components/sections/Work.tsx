@@ -8,7 +8,7 @@ import { projects } from "@/content/projects";
 export function Work() {
   return (
     <section id="work" className="border-t border-line py-24 md:py-32">
-      <div className="edge-rules relative mx-auto max-w-7xl px-6 md:px-12">
+      <div className="relative mx-auto max-w-7xl px-6 md:px-12">
         <TextReveal lines={["Latest Projects"]} className="text-display-lg font-display" />
 
         {/* The covers themselves float above the page and are driven here by ProjectMorph —

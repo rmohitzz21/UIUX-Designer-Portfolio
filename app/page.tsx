@@ -12,7 +12,7 @@ import { Journal } from "@/components/sections/Journal";
 
 export default function Home() {
   return (
-    <main id="top" className="flex flex-1 flex-col">
+    <main id="top" className="relative z-10 flex flex-1 flex-col">
       <ProjectMorphProvider>
         <Hero />
         <Work />

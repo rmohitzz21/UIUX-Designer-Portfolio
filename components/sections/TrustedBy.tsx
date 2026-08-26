@@ -4,7 +4,7 @@ import { ClientLogos } from "@/components/ui/ClientLogos";
 export function TrustedBy() {
   return (
     <section aria-label="Trusted by" className="border-t border-line py-10">
-      <div className="edge-rules relative mx-auto max-w-7xl px-6 md:px-12">
+      <div className="relative mx-auto max-w-7xl px-6 md:px-12">
         <TextReveal
           as="p"
           inline

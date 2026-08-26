@@ -60,24 +60,22 @@ body {
     inset 0 1px 0 color-mix(in srgb, white 60%, transparent);
 }
 
-/* Full-height hairlines marking the content container, as on the reference. */
-.edge-rules::before,
-.edge-rules::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: var(--color-line);
+/* One continuous pair of hairlines marking the content container, drawn once for the whole
+   page rather than per section, so they never break at a section boundary. Fixed, so a
+   full-height vertical line reads identically while costing nothing to scroll. */
+.page-rules {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
   pointer-events: none;
 }
 
-.edge-rules::before {
-  left: 0;
-}
-
-.edge-rules::after {
-  right: 0;
+.page-rules > div {
+  height: 100%;
+  max-width: var(--container-7xl, 80rem);
+  margin-inline: auto;
+  border-left: 1px solid var(--color-line);
+  border-right: 1px solid var(--color-line);
 }
 
 @keyframes marquee {

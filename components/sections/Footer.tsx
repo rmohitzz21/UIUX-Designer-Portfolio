@@ -10,7 +10,7 @@ export function Footer() {
   const hrefFor = (hash: string) => (isHome ? hash : `/${hash}`);
 
   return (
-    <footer className="relative overflow-hidden bg-text text-bg">
+    <footer className="relative z-10 overflow-hidden bg-text text-bg">
       <div className="relative mx-auto max-w-7xl px-6 pt-24 md:px-12 md:pt-32">
         <TextReveal
           as="h2"

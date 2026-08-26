@@ -7,7 +7,7 @@ export function FeaturedQuote() {
 
   return (
     <section className="border-t border-line py-24 md:py-32">
-      <div className="edge-rules relative mx-auto max-w-7xl px-6 md:px-12">
+      <div className="relative mx-auto max-w-7xl px-6 md:px-12">
         <div className="mx-auto max-w-4xl text-center">
           <TextReveal
             as="blockquote"

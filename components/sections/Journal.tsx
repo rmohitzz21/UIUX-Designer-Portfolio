@@ -12,7 +12,7 @@ const DATE_FORMAT = new Intl.DateTimeFormat("en-US", {
 export function Journal() {
   return (
     <section id="journal" className="border-t border-line py-24 md:py-32">
-      <div className="edge-rules relative mx-auto max-w-7xl px-6 md:px-12">
+      <div className="relative mx-auto max-w-7xl px-6 md:px-12">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <TextReveal
             lines={[{ text: "From my journal,", muted: true }, "design insights."]}

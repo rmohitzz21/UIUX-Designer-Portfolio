@@ -23,7 +23,7 @@ export function Hero() {
 
   return (
     <section id="hero" className="relative overflow-hidden pt-32 md:pt-40">
-      <div className="edge-rules relative mx-auto max-w-7xl px-6 md:px-12">
+      <div className="relative mx-auto max-w-7xl px-6 md:px-12">
         <div className="grid items-center gap-10 pb-16 lg:grid-cols-[1.05fr_1fr] lg:gap-6">
           <div className="max-w-xl">
             <motion.span
@@ -63,7 +63,7 @@ export function Hero() {
       </div>
 
       <div className="border-t border-line">
-        <div className="edge-rules relative mx-auto max-w-7xl px-6 py-6 md:px-12">
+        <div className="relative mx-auto max-w-7xl px-6 py-6 md:px-12">
           <motion.div {...fade(0.8)} className="flex flex-col gap-6 md:flex-row md:items-center md:gap-10">
             <SocialProof className="shrink-0" />
             <ClientLogos className="min-w-0 flex-1" />

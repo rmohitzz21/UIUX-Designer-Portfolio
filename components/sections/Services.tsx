@@ -46,7 +46,7 @@ const GLYPHS: Record<string, React.ReactNode> = {
 export function Services() {
   return (
     <section id="services" className="border-t border-line py-24 md:py-32">
-      <div className="edge-rules relative mx-auto max-w-7xl px-6 md:px-12">
+      <div className="relative mx-auto max-w-7xl px-6 md:px-12">
         <div className="grid gap-14 lg:grid-cols-2 lg:gap-20">
           <div>
             <TextReveal

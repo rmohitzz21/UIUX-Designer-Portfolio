@@ -7,7 +7,7 @@ import { site, about } from "@/content/site";
 export function CtaCard({ lines, id = "contact" }: { lines: readonly RevealLine[]; id?: string }) {
   return (
     <section id={id} className="border-t border-line py-20 md:py-24">
-      <div className="edge-rules relative mx-auto max-w-7xl px-6 md:px-12">
+      <div className="relative mx-auto max-w-7xl px-6 md:px-12">
         <div className="rounded-3xl border border-line bg-surface px-6 py-16 text-center md:px-16 md:py-20">
           <Reveal as="div">
             <SocialProof align="center" />

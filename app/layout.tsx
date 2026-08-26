@@ -52,6 +52,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         />
       </head>
       <body className="min-h-full flex flex-col bg-bg text-text font-body">
+        {/* Container hairlines, drawn once behind the whole page. */}
+        <div className="page-rules" aria-hidden="true">
+          <div />
+        </div>
+
         <SmoothScrollProvider>
           <Nav />
           {children}
