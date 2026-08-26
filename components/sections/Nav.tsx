@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { site, navLinks, about } from "@/content/site";
 import { useLenis } from "@/hooks/useLenis";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { EASE_REVEAL } from "@/lib/motion";
+import { useContactDrawer } from "@/components/sections/ContactDrawer";
 
 function Avatar({ size = 32 }: { size?: number }) {
   return (
@@ -26,7 +27,7 @@ export function Nav() {
   const reducedMotion = useReducedMotion();
   const lenis = useLenis();
   const isHome = usePathname() === "/";
-  const router = useRouter();
+  const drawer = useContactDrawer();
   const hrefFor = (href: string) =>
     href.startsWith("/") ? href : isHome ? href : `/${href}`;
 
@@ -65,11 +66,7 @@ export function Nav() {
   }, [open]);
 
   function goToContact() {
-    if (isHome) {
-      document.querySelector("#contact")?.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth" });
-    } else {
-      router.push("/#contact");
-    }
+    drawer.open("contact");
   }
 
   return (
@@ -78,7 +75,7 @@ export function Nav() {
         <motion.div
           layout={!reducedMotion}
           transition={reducedMotion ? { duration: 0 } : { duration: 0.5, ease: EASE_REVEAL }}
-          className="nav-glass pointer-events-auto flex items-center gap-3 py-2 pr-2 pl-2 md:gap-6"
+          className="nav-glass pointer-events-auto flex items-center gap-3 p-3 md:gap-6"
         >
           <a href={hrefFor("#top")} className="flex shrink-0 items-center gap-2.5 pl-1">
             <Avatar />
@@ -118,7 +115,7 @@ export function Nav() {
                     <a
                       key={link.href}
                       href={hrefFor(link.href)}
-                      className="text-sm whitespace-nowrap text-subtle transition-colors hover:text-text"
+                      className="nav-link text-sm font-semibold whitespace-nowrap"
                     >
                       {link.label}
                     </a>
@@ -128,7 +125,7 @@ export function Nav() {
                 <button
                   type="button"
                   onClick={goToContact}
-                  className="hidden rounded-full bg-text px-5 py-2.5 text-sm font-medium whitespace-nowrap text-bg transition-opacity hover:opacity-85 md:inline-flex"
+                  className="hidden h-8 items-center rounded-3xl bg-bg px-3 text-sm font-semibold whitespace-nowrap shadow-sm transition-shadow hover:shadow md:inline-flex"
                 >
                   Contact
                 </button>

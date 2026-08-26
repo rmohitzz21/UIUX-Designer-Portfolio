@@ -5,11 +5,8 @@ import { TextReveal } from "@/components/motion/TextReveal";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { EASE_REVEAL } from "@/lib/motion";
+import { useContactDrawer } from "@/components/sections/ContactDrawer";
 import { pricingPlans, pricingPromo, pricingSteps } from "@/content/site";
-
-function scrollToContact(reducedMotion: boolean) {
-  document.querySelector("#contact")?.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth" });
-}
 
 /** Mono-line step glyphs, drawn in the same style as the Services icons. */
 const STEP_GLYPHS: Record<string, React.ReactNode> = {
@@ -102,7 +99,7 @@ function Check() {
 }
 
 export function Pricing() {
-  const reducedMotion = useReducedMotion();
+  const drawer = useContactDrawer();
   const [unlimited, single] = pricingPlans;
 
   return (
@@ -187,7 +184,7 @@ export function Pricing() {
               <div className="mt-10 flex items-center gap-5">
                 <button
                   type="button"
-                  onClick={() => scrollToContact(reducedMotion)}
+                  onClick={() => drawer.open("quote")}
                   className="rounded-full bg-text px-7 py-3.5 text-sm font-medium text-bg transition-opacity hover:opacity-85"
                 >
                   {unlimited.cta}
@@ -217,7 +214,7 @@ export function Pricing() {
 
             <button
               type="button"
-              onClick={() => scrollToContact(reducedMotion)}
+              onClick={() => drawer.open("quote")}
               className="justify-self-start rounded-full bg-bg px-7 py-3.5 text-sm font-medium text-text transition-opacity hover:opacity-85 lg:justify-self-end"
             >
               {single.cta}

@@ -3,6 +3,7 @@ import { Mrs_Saint_Delafield } from "next/font/google";
 import { SmoothScrollProvider } from "@/hooks/useLenis";
 import { Nav } from "@/components/sections/Nav";
 import { Footer } from "@/components/sections/Footer";
+import { ContactDrawerProvider } from "@/components/sections/ContactDrawer";
 import { site } from "@/content/site";
 import "@/styles/globals.css";
 
@@ -59,9 +60,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </div>
 
         <SmoothScrollProvider>
-          <Nav />
-          {children}
-          <Footer />
+          <ContactDrawerProvider>
+            <Nav />
+            {children}
+            <Footer />
+          </ContactDrawerProvider>
         </SmoothScrollProvider>
       </body>
     </html>

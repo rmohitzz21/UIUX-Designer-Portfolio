@@ -134,3 +134,24 @@ body {
     transform: translateX(0);
   }
 }
+
+/* Nav links: black at rest like the reference, and the group dims so the hovered one leads.
+   Same 0.3s colour transition the reference declares. */
+.nav-link {
+  color: var(--color-text);
+  transition: color 0.3s cubic-bezier(0.44, 0, 0.56, 1);
+}
+
+nav:hover .nav-link {
+  color: var(--color-muted);
+}
+
+nav:hover .nav-link:hover {
+  color: var(--color-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-link {
+    transition: none;
+  }
+}

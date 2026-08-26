@@ -25,6 +25,7 @@ export const site = {
   socials: {
     linkedin: "https://linkedin.com/in/zulaprajapati",
     dribbble: "https://dribbble.com/zulaprajapati",
+    behance: "https://behance.net/zulaprajapati",
     instagram: "https://instagram.com/zulaprajapati.design",
     resume: "/zula-prajapati-resume.pdf",
   },
@@ -35,7 +36,6 @@ export const site = {
 export const navLinks = [
   { label: "Work", href: "/projects" },
   { label: "Services", href: "#services" },
-  { label: "Pricing", href: "#pricing" },
   { label: "Journal", href: "/journal" },
 ] as const;
 
@@ -50,7 +50,14 @@ export const services = [
   { title: "UX Consultation", icon: "panel" },
 ] as const;
 
-export const techStack = ["Figma", "Framer", "Webflow", "Rive", "Blender", "Linear"] as const;
+export const techStack = [
+  { name: "Figma", icon: "figma" },
+  { name: "FigJam", icon: "figjam" },
+  { name: "Cursor", icon: "cursor" },
+  { name: "Canva", icon: "canva" },
+  { name: "Adobe Illustrator", icon: "illustrator" },
+  { name: "CorelDRAW", icon: "corel" },
+] as const;
 
 export const pricingSteps = [
   {
