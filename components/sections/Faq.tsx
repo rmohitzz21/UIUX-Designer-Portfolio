@@ -135,7 +135,7 @@ export function Faq() {
 
   return (
     <section id="faq" className="border-t border-line py-24 md:py-32">
-      <div className="relative mx-auto max-w-7xl px-6 md:px-12">
+      <div className="section-container">
         <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
           <div>
             <TextReveal

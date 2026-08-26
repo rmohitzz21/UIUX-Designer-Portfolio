@@ -8,7 +8,7 @@ import { ClientLogos } from "@/components/ui/ClientLogos";
 export function TrustedBy() {
   return (
     <section aria-label="Trusted by" className="border-t border-line py-8">
-      <div className="relative mx-auto flex max-w-7xl flex-col gap-5 px-6 md:flex-row md:items-center md:gap-12 md:px-12">
+      <div className="section-container flex flex-col gap-5 md:flex-row md:items-center md:gap-12">
         <TextReveal
           as="p"
           inline

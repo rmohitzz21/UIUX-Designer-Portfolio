@@ -6,8 +6,8 @@ import { site, about } from "@/content/site";
 /** The closing call-to-action panel: a white card holding social proof, a two-tone heading and the booking button. */
 export function CtaCard({ lines, id = "contact" }: { lines: readonly RevealLine[]; id?: string }) {
   return (
-    <section id={id} className="border-t border-line py-20 md:py-24">
-      <div className="relative mx-auto max-w-7xl px-6 md:px-12">
+    <section id={id} className="border-t border-line py-24 md:py-32">
+      <div className="section-container">
         <div className="rounded-3xl border border-line bg-surface px-6 py-16 text-center md:px-16 md:py-20">
           <Reveal as="div">
             <SocialProof align="center" />

@@ -6,8 +6,8 @@ export function FeaturedQuote() {
   const featured = testimonials[0];
 
   return (
-    <section className="border-t border-line py-24 md:py-32">
-      <div className="relative mx-auto max-w-7xl px-6 md:px-12">
+    <section className="border-t border-line py-16">
+      <div className="section-container">
         <div className="mx-auto max-w-4xl text-center">
           <TextReveal
             as="blockquote"

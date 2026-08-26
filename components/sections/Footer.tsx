@@ -12,7 +12,7 @@ export function Footer() {
 
   return (
     <footer className="relative z-10 overflow-hidden bg-text text-bg">
-      <div className="relative mx-auto max-w-7xl px-6 pt-24 md:px-12 md:pt-32">
+      <div className="section-container pt-24 md:pt-32">
         <TextReveal
           as="h2"
           lines={["Let's create", { text: "incredible work together.", muted: true }]}

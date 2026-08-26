@@ -39,7 +39,7 @@ export default async function CaseStudyPage(props: PageProps<"/projects/[slug]">
   return (
     <main id="top" className="relative z-10 flex flex-1 flex-col">
       <section className="pt-36 pb-16 md:pt-44">
-        <div className="relative mx-auto max-w-7xl px-6 md:px-12">
+        <div className="section-container">
           <div className="max-w-3xl">
             <TextReveal
               as="h1"
@@ -100,7 +100,7 @@ export default async function CaseStudyPage(props: PageProps<"/projects/[slug]">
       </section>
 
       <section className="pb-8">
-        <div className="relative mx-auto max-w-7xl px-6 md:px-12">
+        <div className="section-container">
           <Reveal as="div">
             <ProjectArt tint={project.cover} className="aspect-[16/9] w-full rounded-2xl border border-line" />
           </Reveal>
@@ -109,7 +109,7 @@ export default async function CaseStudyPage(props: PageProps<"/projects/[slug]">
 
       {blocks.map((block, i) => (
         <section key={i} className="py-16 md:py-20">
-          <div className="relative mx-auto max-w-7xl px-6 md:px-12">
+          <div className="section-container">
             {block.layout === "pair" ? (
               <RevealGroup className="grid gap-6 sm:grid-cols-2">
                 <RevealItem>
@@ -141,8 +141,8 @@ export default async function CaseStudyPage(props: PageProps<"/projects/[slug]">
         </section>
       ))}
 
-      <section className="border-t border-line py-20">
-        <div className="relative mx-auto max-w-7xl px-6 md:px-12">
+      <section className="border-t border-line py-24 md:py-32">
+        <div className="section-container">
           <TextReveal
             as="h2"
             lines={[{ text: "By the", muted: true }, "numbers."]}
@@ -159,8 +159,8 @@ export default async function CaseStudyPage(props: PageProps<"/projects/[slug]">
         </div>
       </section>
 
-      <section className="border-t border-line py-24">
-        <div className="relative mx-auto max-w-7xl px-6 md:px-12">
+      <section className="border-t border-line py-24 md:py-32">
+        <div className="section-container">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <TextReveal lines={["More Projects"]} className="text-display-lg font-display" />
             <Link href="/projects" className="group inline-flex items-center gap-2 pb-2 text-sm font-medium">

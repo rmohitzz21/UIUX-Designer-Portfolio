@@ -36,7 +36,7 @@ export default async function ArticlePage(props: PageProps<"/journal/[slug]">) {
   return (
     <main id="top" className="relative z-10 flex flex-1 flex-col">
       <section className="pt-36 pb-12 md:pt-44">
-        <div className="relative mx-auto max-w-7xl px-6 md:px-12">
+        <div className="section-container">
           <div className="mx-auto max-w-3xl text-center">
             <Reveal as="p" className="text-sm font-medium text-muted">
               {post.category}
@@ -61,7 +61,7 @@ export default async function ArticlePage(props: PageProps<"/journal/[slug]">) {
       </section>
 
       <section className="pb-16">
-        <div className="relative mx-auto max-w-7xl px-6 md:px-12">
+        <div className="section-container">
           <Reveal as="div">
             <span className="relative block aspect-[16/9] w-full overflow-hidden rounded-3xl border border-line bg-surface">
               <Image src={post.cover} alt="" fill sizes="(min-width: 1280px) 76rem, 100vw" className="object-cover" priority />
@@ -71,7 +71,7 @@ export default async function ArticlePage(props: PageProps<"/journal/[slug]">) {
       </section>
 
       <section className="pb-20">
-        <div className="relative mx-auto max-w-7xl px-6 md:px-12">
+        <div className="section-container">
           <div className="mx-auto flex max-w-2xl flex-col gap-6">
             {post.body.map((paragraph, i) => (
               <Reveal as="p" key={i} delay={i * 0.05} className="text-lg leading-relaxed text-muted">
@@ -82,8 +82,8 @@ export default async function ArticlePage(props: PageProps<"/journal/[slug]">) {
         </div>
       </section>
 
-      <section className="border-t border-line py-24">
-        <div className="relative mx-auto max-w-7xl px-6 md:px-12">
+      <section className="border-t border-line py-24 md:py-32">
+        <div className="section-container">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <TextReveal lines={[{ text: "Keep", muted: true }, "reading."]} className="text-display-lg font-display" />
             <Link href="/journal" className="group inline-flex items-center gap-2 pb-2 text-sm font-medium">

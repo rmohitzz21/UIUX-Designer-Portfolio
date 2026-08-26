@@ -107,7 +107,7 @@ export function Pricing() {
 
   return (
     <section id="pricing" className="border-t border-line py-24 md:py-32">
-      <div className="relative mx-auto max-w-7xl px-6 md:px-12">
+      <div className="section-container">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-20">
           <TextReveal
             lines={[{ text: "Simple pricing.", muted: true }, "Standout designs."]}

@@ -17,7 +17,7 @@ export default function JournalPage() {
   return (
     <main id="top" className="relative z-10 flex flex-1 flex-col">
       <section className="pt-36 pb-16 md:pt-44">
-        <div className="relative mx-auto max-w-7xl px-6 text-center md:px-12">
+        <div className="section-container text-center">
           <TextReveal
             as="h1"
             lines={[...journalIntro.heading]}
@@ -32,7 +32,7 @@ export default function JournalPage() {
       </section>
 
       <section className="pb-8">
-        <div className="relative mx-auto max-w-7xl px-6 md:px-12">
+        <div className="section-container">
           <Reveal as="div">
             <FeaturedPostCard post={featured} />
           </Reveal>
@@ -40,7 +40,7 @@ export default function JournalPage() {
       </section>
 
       <section className="py-12 md:py-16">
-        <div className="relative mx-auto max-w-7xl px-6 md:px-12">
+        <div className="section-container">
           <JournalArchive posts={rest} />
         </div>
       </section>
