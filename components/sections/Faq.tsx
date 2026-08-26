@@ -157,7 +157,10 @@ export function Faq() {
             </ul>
           </div>
 
-          <DiscoveryCard />
+          {/* Sticks below the nav and rides the scroll, releasing level with the last question. */}
+          <div className="lg:sticky lg:top-28 lg:self-start">
+            <DiscoveryCard />
+          </div>
         </div>
       </div>
     </section>
