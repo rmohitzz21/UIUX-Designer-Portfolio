@@ -31,11 +31,14 @@ function LenisScrollTriggerBridge() {
 export function SmoothScrollProvider({ children }: { children: React.ReactNode }) {
   const reducedMotion = useReducedMotion();
 
-  if (reducedMotion) return <>{children}</>;
-
+  // Always render the same tree: reduced motion switches smoothing off through options rather
+  // than swapping the provider out, which would change the markup between server and client.
   return (
-    <ReactLenis root options={{ autoRaf: false }}>
-      <LenisScrollTriggerBridge />
+    <ReactLenis
+      root
+      options={{ autoRaf: false, smoothWheel: !reducedMotion, lerp: reducedMotion ? 1 : undefined }}
+    >
+      {!reducedMotion && <LenisScrollTriggerBridge />}
       {children}
     </ReactLenis>
   );

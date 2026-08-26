@@ -42,7 +42,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${signature.variable} h-full antialiased`}>
+    // Lenis and CustomCursor both add classes to <html> after mount, which React otherwise
+    // reports as a hydration attribute mismatch on the root element.
+    <html lang="en" className={`${signature.variable} h-full antialiased`} suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://api.fontshare.com" />
         <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="" />

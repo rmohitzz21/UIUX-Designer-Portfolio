@@ -139,6 +139,7 @@ export function ProjectMorphProvider({ children }: { children: ReactNode }) {
       el.style.height = `${lerp(hero.height, grid.height, t)}px`;
       el.style.transform = `translate3d(${lerp(hero.left, grid.left, t)}px, ${lerp(hero.top, grid.top, t)}px, 0) rotate(${rot}deg)`;
       el.style.pointerEvents = t > 0.9 ? "auto" : "none";
+      el.classList.toggle("morph-landed", t > 0.9);
     }
   }, [reducedMotion]);
 
@@ -191,10 +192,16 @@ export function ProjectMorphProvider({ children }: { children: ReactNode }) {
               }}
               tabIndex={-1}
               aria-label={project.title}
-              className="absolute top-0 left-0 overflow-hidden rounded-2xl border border-line bg-surface shadow-2xl will-change-transform"
+              className="morph-card absolute top-0 left-0 overflow-hidden rounded-2xl border border-line bg-surface shadow-2xl will-change-transform"
               style={{ zIndex: HERO_POSE[i].z, opacity: ready ? 1 : 0 }}
             >
-              <ProjectArt tint={project.thumbnail} className="h-full w-full" />
+              <ProjectArt tint={project.thumbnail} className="morph-art h-full w-full" />
+
+              <span className="morph-cta pointer-events-none absolute inset-x-0 bottom-8 flex justify-center">
+                <span className="rounded-full bg-text/75 px-5 py-2.5 text-sm font-medium text-bg backdrop-blur-sm">
+                  View Project
+                </span>
+              </span>
             </Link>
           ))}
         </div>
