@@ -3,6 +3,7 @@ import { TextReveal } from "@/components/motion/TextReveal";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { FeaturedPostCard, PostCard } from "@/components/ui/PostCard";
 import { posts } from "@/content/site";
+import { ArrowUpRight } from "@/components/ui/ArrowUpRight";
 
 export function Journal() {
   const [featured, ...rest] = posts;
@@ -17,9 +18,7 @@ export function Journal() {
           />
           <Link href="/journal" className="group inline-flex items-center gap-2 pb-2 text-sm font-medium">
             View All
-            <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
-              ↗
-            </span>
+            <ArrowUpRight className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none" />
           </Link>
         </div>
 

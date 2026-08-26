@@ -4,6 +4,7 @@ import { TextReveal } from "@/components/motion/TextReveal";
 import { GridMorphSlot } from "@/components/motion/ProjectMorph";
 import { MORPH_COUNT } from "@/lib/motion";
 import { projects } from "@/content/projects";
+import { ArrowUpRight } from "@/components/ui/ArrowUpRight";
 
 export function Work() {
   return (
@@ -26,7 +27,7 @@ export function Work() {
                       <span className="mt-1 block text-sm text-muted">{project.role}</span>
                     </span>
                     <span className="flex shrink-0 items-center gap-1.5 pt-1 text-sm text-subtle transition-colors group-hover:text-text">
-                      <span aria-hidden="true">↗</span>
+                      <ArrowUpRight />
                       View Project
                     </span>
                   </Link>
@@ -42,9 +43,7 @@ export function Work() {
             className="group inline-flex items-center gap-2 text-sm font-medium transition-opacity hover:opacity-70"
           >
             View all my projects
-            <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
-              ↗
-            </span>
+            <ArrowUpRight className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none" />
           </Link>
         </div>
       </div>

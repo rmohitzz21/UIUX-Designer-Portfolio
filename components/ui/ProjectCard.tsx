@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ProjectArt } from "@/components/ui/ProjectArt";
+import { ArrowUpRight } from "@/components/ui/ArrowUpRight";
 import type { Project } from "@/content/projects";
 
 /**
@@ -31,7 +32,7 @@ export function ProjectCard({ project }: { project: Project }) {
           <p className="mt-1 text-sm text-muted">{project.role}</p>
         </div>
         <span className="flex shrink-0 items-center gap-1.5 pt-1 text-sm text-subtle transition-colors group-hover:text-text">
-          <span aria-hidden="true">↗</span>
+          <ArrowUpRight />
           View Project
         </span>
       </div>

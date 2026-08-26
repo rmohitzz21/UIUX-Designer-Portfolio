@@ -7,6 +7,7 @@ import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { PostCard } from "@/components/ui/PostCard";
 import { CtaCard } from "@/components/sections/CtaCard";
 import { posts, site } from "@/content/site";
+import { ArrowUpRight } from "@/components/ui/ArrowUpRight";
 
 const DATE_FORMAT = new Intl.DateTimeFormat("en-US", {
   month: "short",
@@ -88,9 +89,7 @@ export default async function ArticlePage(props: PageProps<"/journal/[slug]">) {
             <TextReveal lines={[{ text: "Keep", muted: true }, "reading."]} className="text-display-lg font-display" />
             <Link href="/journal" className="group inline-flex items-center gap-2 pb-2 text-sm font-medium">
               View All
-              <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
-                ↗
-              </span>
+              <ArrowUpRight className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none" />
             </Link>
           </div>
 

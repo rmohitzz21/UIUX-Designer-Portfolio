@@ -7,6 +7,7 @@ import { ProjectArt } from "@/components/ui/ProjectArt";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { CtaCard } from "@/components/sections/CtaCard";
 import { projects } from "@/content/projects";
+import { ArrowUpRight } from "@/components/ui/ArrowUpRight";
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.id }));
@@ -89,9 +90,7 @@ export default async function CaseStudyPage(props: PageProps<"/projects/[slug]">
                   className="group inline-flex items-center gap-2 text-lg font-medium"
                 >
                   {project.links[0].label}
-                  <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
-                    ↗
-                  </span>
+                  <ArrowUpRight className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none" />
                 </a>
               </Reveal>
             )}
@@ -165,9 +164,7 @@ export default async function CaseStudyPage(props: PageProps<"/projects/[slug]">
             <TextReveal lines={["More Projects"]} className="text-display-lg font-display" />
             <Link href="/projects" className="group inline-flex items-center gap-2 pb-2 text-sm font-medium">
               View all
-              <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
-                ↗
-              </span>
+              <ArrowUpRight className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none" />
             </Link>
           </div>
 

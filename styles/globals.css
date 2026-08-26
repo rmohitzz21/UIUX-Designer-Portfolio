@@ -70,11 +70,6 @@ body {
   color: var(--color-bg);
 }
 
-.cursor-custom,
-.cursor-custom * {
-  cursor: none !important;
-}
-
 /* Navbar glass — measured off the reference: half-opaque white over a 5px blur,
    32px radius, and deliberately no border or shadow. */
 .nav-glass {

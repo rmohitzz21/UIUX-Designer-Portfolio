@@ -3,7 +3,6 @@ import { Mrs_Saint_Delafield } from "next/font/google";
 import { SmoothScrollProvider } from "@/hooks/useLenis";
 import { Nav } from "@/components/sections/Nav";
 import { Footer } from "@/components/sections/Footer";
-import { CustomCursor } from "@/components/motion/CustomCursor";
 import { site } from "@/content/site";
 import "@/styles/globals.css";
 
@@ -42,8 +41,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    // Lenis and CustomCursor both add classes to <html> after mount, which React otherwise
-    // reports as a hydration attribute mismatch on the root element.
+    // Lenis adds classes to <html> after mount, which React otherwise reports as a
+    // hydration attribute mismatch on the root element.
     <html lang="en" className={`${signature.variable} h-full antialiased`} suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://api.fontshare.com" />
@@ -64,7 +63,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
           <Footer />
         </SmoothScrollProvider>
-        <CustomCursor />
       </body>
     </html>
   );
