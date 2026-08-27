@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ProjectArt } from "@/components/ui/ProjectArt";
+import Image from "next/image";
 import { ArrowUpRight } from "@/components/ui/ArrowUpRight";
 import type { Project } from "@/content/projects";
 
@@ -11,10 +11,15 @@ export function ProjectCard({ project }: { project: Project }) {
   return (
     <Link href={`/projects/${project.id}`} className="group block">
       <div className="relative overflow-hidden rounded-2xl border border-line bg-surface">
-        <ProjectArt
-          tint={project.thumbnail}
-          className="aspect-[16/11] w-full transition-transform duration-700 ease-out group-hover:scale-[1.05] motion-reduce:transition-none"
-        />
+        <span className="relative block aspect-[16/11] w-full">
+          <Image
+            src={project.image}
+            alt=""
+            fill
+            sizes="(min-width: 768px) 50vw, 100vw"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05] motion-reduce:transition-none"
+          />
+        </span>
 
         <span
           aria-hidden="true"
@@ -29,7 +34,7 @@ export function ProjectCard({ project }: { project: Project }) {
       <div className="mt-5 flex items-start justify-between gap-6">
         <div>
           <h3 className="text-lg font-semibold">{project.title}</h3>
-          <p className="mt-1 text-sm text-muted">{project.role}</p>
+          <p className="mt-1 text-sm text-muted">{project.kind}</p>
         </div>
         <span className="flex shrink-0 items-center gap-1.5 pt-1 text-sm text-subtle transition-colors group-hover:text-text">
           <ArrowUpRight />

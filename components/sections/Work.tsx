@@ -24,7 +24,7 @@ export function Work() {
                   <Link href={`/projects/${project.id}`} className="group mt-5 flex items-start justify-between gap-6">
                     <span>
                       <span className="block text-lg font-semibold">{project.title}</span>
-                      <span className="mt-1 block text-sm text-muted">{project.role}</span>
+                      <span className="mt-1 block text-sm text-muted">{project.kind}</span>
                     </span>
                     <span className="flex shrink-0 items-center gap-1.5 pt-1 text-sm text-subtle transition-colors group-hover:text-text">
                       <ArrowUpRight />

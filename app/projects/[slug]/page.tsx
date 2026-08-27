@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { TextReveal } from "@/components/motion/TextReveal";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
-import { ProjectArt } from "@/components/ui/ProjectArt";
+import Image from "next/image";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { CtaCard } from "@/components/sections/CtaCard";
 import { projects } from "@/content/projects";
@@ -101,7 +101,9 @@ export default async function CaseStudyPage(props: PageProps<"/projects/[slug]">
       <section className="pb-8">
         <div className="section-container">
           <Reveal as="div">
-            <ProjectArt tint={project.cover} className="aspect-[16/9] w-full rounded-2xl border border-line" />
+            <span className="relative block aspect-[16/9] w-full overflow-hidden rounded-2xl border border-line">
+              <Image src={project.image} alt="" fill sizes="(min-width: 1280px) 62rem, 100vw" className="object-cover" priority />
+            </span>
           </Reveal>
         </div>
       </section>
@@ -112,21 +114,21 @@ export default async function CaseStudyPage(props: PageProps<"/projects/[slug]">
             {block.layout === "pair" ? (
               <RevealGroup className="grid gap-6 sm:grid-cols-2">
                 <RevealItem>
-                  <ProjectArt
-                    tint={project.thumbnail}
-                    className="aspect-square w-full rounded-2xl border border-line"
-                  />
+                  <span className="relative block aspect-square w-full overflow-hidden rounded-2xl border border-line">
+                    <Image src={project.image} alt="" fill sizes="(min-width: 640px) 30rem, 100vw" className="object-cover object-left" />
+                  </span>
                 </RevealItem>
                 <RevealItem>
-                  <ProjectArt tint={project.cover} className="aspect-square w-full rounded-2xl border border-line" />
+                  <span className="relative block aspect-square w-full overflow-hidden rounded-2xl border border-line">
+                    <Image src={project.image} alt="" fill sizes="(min-width: 640px) 30rem, 100vw" className="object-cover object-right" />
+                  </span>
                 </RevealItem>
               </RevealGroup>
             ) : (
               <Reveal as="div">
-                <ProjectArt
-                  tint={project.cover}
-                  className="aspect-[16/9] w-full rounded-2xl border border-line"
-                />
+                <span className="relative block aspect-[16/9] w-full overflow-hidden rounded-2xl border border-line">
+                  <Image src={project.image} alt="" fill sizes="(min-width: 1280px) 62rem, 100vw" className="object-cover" />
+                </span>
               </Reveal>
             )}
 

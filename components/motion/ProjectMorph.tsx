@@ -11,7 +11,7 @@ import {
   type ReactNode,
 } from "react";
 import Link from "next/link";
-import { ProjectArt } from "@/components/ui/ProjectArt";
+import Image from "next/image";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { projects } from "@/content/projects";
 import { MORPH_COUNT } from "@/lib/motion";
@@ -195,7 +195,13 @@ export function ProjectMorphProvider({ children }: { children: ReactNode }) {
               className="morph-card absolute top-0 left-0 overflow-hidden rounded-2xl border border-line bg-surface shadow-2xl will-change-transform"
               style={{ zIndex: HERO_POSE[i].z, opacity: ready ? 1 : 0 }}
             >
-              <ProjectArt tint={project.thumbnail} className="morph-art h-full w-full" />
+              <Image
+                src={project.image}
+                alt=""
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="morph-art object-cover"
+              />
 
               <span className="morph-cta pointer-events-none absolute inset-x-0 bottom-8 flex justify-center">
                 <span className="rounded-full bg-text/75 px-5 py-2.5 text-sm font-medium text-bg backdrop-blur-sm">
