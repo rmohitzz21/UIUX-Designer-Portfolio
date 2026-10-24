@@ -1,20 +1,18 @@
-// DUMMY CONTENT — replace with real copy before launch.
+// Profile data sourced from LinkedIn, Behance, and Dribbble (Aug 2026).
 export const site = {
   name: "Zula Prajapati",
-  role: "Product & UI/UX Designer",
-  roles: ["Product Designer", "UI/UX Designer", "Design Systems", "Interaction Design"],
+  role: "UI/UX Designer & Graphic Designer",
+  roles: ["UI/UX Designer", "Product Designer", "Web Design", "Mobile Design", "Graphic Design"],
   tagline: "I design digital products that feel inevitable.",
   /** Two-tone headline: first line sits in grey, second lands in black. */
   heroLines: ["Design that", "feels inevitable."],
-  heroSubtextLead: "Strategic design that earns its keep, not just its likes.",
-  heroSubtext:
-    "I build the product surfaces your users reach for without thinking — and the systems that keep them consistent.",
-  location: "Brooklyn, NY",
-  email: "hello@zulaprajapati.design",
-  availability: "Available for September '26",
-  socialProof: { count: "40+", label: "Happy clients" },
-  /** PLACEHOLDER — stock stand-ins until real photography lands. */
-  photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=900&q=80",
+  heroSubtextLead:
+    "I'm a UI/UX Designer focused on creating intuitive interfaces, meaningful interactions, and scalable digital products that work for both people and businesses.",
+  heroSubtext: "",
+  location: "Ahmedabad, India",
+  email: "zulaprajapati26@gmail.com",
+  socialProof: { count: "16+", label: "Shots on Dribbble" },
+  photo: "/about/zula.png",
   clientFaces: [
     "https://randomuser.me/api/portraits/women/44.jpg",
     "https://randomuser.me/api/portraits/men/32.jpg",
@@ -23,10 +21,10 @@ export const site = {
     "https://randomuser.me/api/portraits/women/12.jpg",
   ],
   socials: {
-    linkedin: "https://linkedin.com/in/zulaprajapati",
-    dribbble: "https://dribbble.com/zulaprajapati",
-    behance: "https://behance.net/zulaprajapati",
-    instagram: "https://instagram.com/zulaprajapati.design",
+    linkedin: "https://www.linkedin.com/in/zula26/",
+    dribbble: "https://dribbble.com/Zulaprajapati",
+    behance: "https://www.behance.net/zulaprajapati",
+    instagram: "https://www.instagram.com/expensive_.art/",
     resume: "/zula-prajapati-resume.pdf",
   },
   contactLines: ["Let's build something", "worth using."],
@@ -36,112 +34,100 @@ export const site = {
 export const navLinks = [
   { label: "Work", href: "/projects" },
   { label: "Services", href: "#services" },
-  { label: "Journal", href: "/journal" },
+  { label: "Resume", href: site.socials.resume },
 ] as const;
 
 export const servicesHeading = ["Services that", "supercharge your", "business."] as const;
 
 export const services = [
   { title: "Product & UI Design", icon: "layout" },
+  { title: "Mobile App Design", icon: "orbit" },
+  { title: "Web & Landing Pages", icon: "window" },
   { title: "Design Systems", icon: "grid" },
-  { title: "Landing Pages", icon: "window" },
-  { title: "Motion & Interaction", icon: "sparkle" },
-  { title: "Prototyping", icon: "orbit" },
+  { title: "Prototyping", icon: "sparkle" },
   { title: "UX Consultation", icon: "panel" },
 ] as const;
 
 export const techStack = [
   { name: "Figma", icon: "figma" },
   { name: "FigJam", icon: "figjam" },
-  { name: "Cursor", icon: "cursor" },
-  { name: "Canva", icon: "canva" },
   { name: "Adobe Illustrator", icon: "illustrator" },
+  { name: "Canva", icon: "canva" },
+  { name: "Cursor", icon: "cursor" },
   { name: "CorelDRAW", icon: "corel" },
 ] as const;
 
-export const pricingSteps = [
-  {
-    icon: "repeat",
-    title: "Subscribe",
-    description: "Pick a plan and start queuing requests on your own board the same day.",
-  },
+export const workSteps = [
   {
     icon: "chat",
-    title: "Request",
-    description: "Ask for anything I offer, from a single landing page to a whole design system.",
+    title: "Talk it through",
+    description: "A short call to understand the product, the people using it, and what success looks like.",
+  },
+  {
+    icon: "repeat",
+    title: "Design in the open",
+    description: "Flows, wireframes and UI shared as they happen — no reveal at the end, no surprises.",
   },
   {
     icon: "deliver",
-    title: "Receive",
-    description: "Work comes back inside 48 hours on average, revised until it's right.",
+    title: "Hand it off",
+    description: "Clean Figma files, a documented system, and time set aside to support the build.",
   },
 ] as const;
 
-/** The tilted black promo card that overlaps the pricing cards. */
-export const pricingPromo = {
-  badge: "Pause or cancel anytime",
-  lead: "Subscription design services",
+/** The tilted black promo card that overlaps the engagement cards. */
+export const workPromo = {
+  badge: "Booking projects for next quarter",
+  lead: "A design partner",
   emphasis: "for teams who move fast.",
   status: "Slots available",
-  title: "Hire me today",
-  description: "Skip the agency markup and work directly with the designer doing the work.",
+  title: "Work with me directly",
+  description: "No account managers, no relay between teams — you talk to the designer doing the work.",
 } as const;
 
-export const pricingPlans = [
+export const workModels = [
   {
-    name: "Unlimited Design",
-    price: "$6,500",
-    cadence: "/ month",
-    descriptionLead: "One flat monthly rate for unlimited design requests.",
-    descriptionRest: "Ideal for ongoing design requirements.",
+    name: "Ongoing partner",
+    stat: "48h",
+    statNote: "average turnaround",
+    descriptionLead: "Embedded design support, week after week.",
+    descriptionRest: "Ideal for teams shipping continuously.",
     features: [
-      "No contracts or commitments",
-      "Pause or cancel anytime",
-      "Multiple brands",
-      "Unlimited requests",
-      "Avg 48 hour turnaround",
-      "Framer & Webflow build-out",
+      "One shared request board",
+      "One priority at a time",
+      "Design system upkeep",
+      "Async updates you can read",
+      "Weekly design review",
+      "UI, web & mobile design",
     ],
-    cta: "Get started",
-    featured: true,
-  },
-  {
-    name: "Single Project",
-    price: "Custom",
-    cadence: "quote",
-    descriptionLead: "Comprehensive design services for any project scope.",
-    descriptionRest: "Ideal for one-time launches or individual tasks.",
-    features: ["Clearly defined scope", "Fixed timeline", "3 revision rounds", "Milestone updates"],
-    cta: "Get quote",
-    featured: false,
+    cta: "Start a conversation",
   },
 ] as const;
 
 export const faqs = [
   {
-    question: "How long does a typical project take?",
+    question: "What do you design?",
     answer:
-      "A landing page is usually one to two weeks. A full product surface with a design system runs four to eight, depending on how much research we need up front.",
+      "I design websites, mobile apps, SaaS products, dashboards and digital experiences — from wireframes through polished UI.",
   },
   {
-    question: "Can you work with our existing brand?",
+    question: "What is your design process?",
     answer:
-      "Yes, and I prefer to. I'll audit what you have, keep what's working, and only propose changes where the current system is actively costing you clarity.",
+      "I typically work through discovery, research, structure, wireframes, UI design, prototyping and refinement.",
   },
   {
-    question: "What makes your process different?",
+    question: "Do you work on UX audits?",
     answer:
-      "Every project gets one sentence that defines success. If a screen doesn't serve that sentence it doesn't ship in v1 — which is why my scopes tend to shrink rather than grow.",
+      "Yes. I evaluate usability, navigation, accessibility, visual consistency, interaction and overall user experience.",
   },
   {
-    question: "Do you support the work after launch?",
+    question: "What tools do you use?",
     answer:
-      "Every engagement includes 30 days of post-launch support. Subscription clients get ongoing iteration as part of the plan.",
+      "Primarily Figma and FigJam, plus Adobe Illustrator, Photoshop, prototyping tools, and Cursor for design-to-build workflows.",
   },
   {
-    question: "Who owns the work?",
-    answer:
-      "You do, fully, on final payment. Source files, components, and documentation all transfer to you.",
+    question: "Have a project in mind?",
+    answer: "Let's talk about it.",
   },
 ] as const;
 
@@ -232,83 +218,89 @@ export const about = {
   /** Each paragraph opens with a full-colour lead, then drops to grey — matching the reference. */
   bio: [
     {
-      lead: "I love turning tangled problems into something people barely notice.",
-      rest: "It started as a habit of redrawing forms I found annoying, and turned into a career once I realised the redrawing was the easy part.",
+      lead: "I love turning messy ideas into interfaces people can use without thinking.",
+      rest: "Based in Ahmedabad, I design as a UI/UX and Product Designer at UX Pacific — and take on freelance work for teams that need clear, user-centered digital products.",
     },
     {
-      lead: "I focus on interfaces that serve a real purpose —",
-      rest: "not just ones that photograph well. A founder once told me our onboarding was beautiful and useless, and it reset how I work.",
+      lead: "I design for real users — not just for the screen.",
+      rest: "From research and wireframes to UI and prototyping, I focus on making websites, apps and dashboards feel simple, even when the problem behind them isn't.",
     },
     {
-      lead: "I'm a perfectionist about the small stuff,",
-      rest: "but only where it earns its keep. That care is usually why clients come back, and why my scopes tend to shrink rather than grow.",
+      lead: "I care about the details that earn their place.",
+      rest: "Whether I'm shaping a parking app, an AI dashboard, or a brand landing page, my goal is work that helps people and businesses move forward.",
     },
   ],
-  pullQuote: "The best interface is the one nobody notices.",
+  pullQuote: "Good design makes complex things feel simple.",
 } as const;
 
 export const stats = [
-  { value: 2, suffix: "+", label: "Years in product design" },
-  { value: 24, suffix: "", label: "Projects shipped" },
-  { value: 12, suffix: "", label: "Happy clients" },
-  { value: 3, suffix: "", label: "Design awards" },
+  { value: 2, suffix: "+", label: "Years designing" },
+  { value: 16, suffix: "+", label: "Dribbble shots" },
+  { value: 1842, suffix: "", label: "Behance project views" },
+  { value: 91, suffix: "", label: "Appreciations" },
 ] as const;
 
 export const skills = [
-  "Product Strategy",
-  "Interaction Design",
-  "Design Systems",
+  "User Interface Design",
+  "User Experience Design",
+  "Wireframing",
   "Prototyping",
   "User Research",
-  "Accessibility",
-  "Motion Design",
-  "Design Leadership",
+  "Visual Design",
+  "Web Design",
+  "Mobile Design",
 ] as const;
 
 export const tools = [
   "Figma",
-  "Framer",
-  "Principle",
-  "Notion",
-  "Linear",
-  "Maze",
-  "Origami Studio",
-  "Webflow",
+  "FigJam",
+  "Adobe Illustrator",
+  "Adobe Photoshop",
+  "CorelDRAW",
+  "HTML5",
+  "Cursor",
+  "Canva",
 ] as const;
 
-export const processSteps = [
-  {
-    number: "01",
-    title: "Discover",
-    description:
-      "I start by getting uncomfortable with how little I know — interviews, support tickets, whatever data already exists — until the real problem surfaces.",
-  },
-  {
-    number: "02",
-    title: "Define",
-    description:
-      "Every project gets one sentence that describes success. If a feature doesn't serve that sentence, it doesn't ship in v1.",
-  },
-  {
-    number: "03",
-    title: "Design",
-    description:
-      "Low-fidelity first, always. I'd rather throw away three rough concepts in a day than fall in love with one polished mockup.",
-  },
-  {
-    number: "04",
-    title: "Deliver",
-    description: "Ship, watch, adjust. The design isn't done when it's shipped — it's done when the data says it worked.",
-  },
+export const designProcessHeading = ["How I turn problems", "into products."] as const;
+
+export const designProcess = [
+  { number: "01", title: "Discover", tags: "Research · Analytics · Interviews" },
+  { number: "02", title: "Define", tags: "User Journey · Problems · Opportunities" },
+  { number: "03", title: "Explore", tags: "Flows · Wireframes · Experiments" },
+  { number: "04", title: "Design", tags: "UI · Interaction · Prototyping" },
+  { number: "05", title: "Validate", tags: "Testing · Iteration · Analytics" },
+  { number: "06", title: "Ship", tags: "Developer Handoff · QA · Optimization" },
 ] as const;
 
+/** Hero marquee — skills & services instead of client names. */
+export const heroSkills = [
+  "User Interface Design",
+  "Wireframing",
+  "User Flows",
+  "Design Systems",
+  "UX Research",
+  "Visual Design",
+  "Information Architecture",
+  "Interaction Design",
+  "Usability Testing",
+  "Accessibility",
+  "Prototyping",
+  "Branding",
+] as const;
+
+/** Industries & products from published Behance / Dribbble work. */
 export const trustedBy = [
-  "Northwind",
-  "Solace Labs",
-  "Vantage",
-  "Fieldnote",
-  "Origin & Co",
-  "Haven",
-  "Ember Studio",
-  "Greyline",
+  "ParkEase",
+  "Dizzo",
+  "Myntra",
+  "Zomato",
+  "PawPal",
+  "SkyHive",
+  "TruePath Legal",
+  "Finovate",
+  "Mayora",
+  "PipePros",
+  "Calmaura",
+  "MediSphere",
 ] as const;

@@ -1,4 +1,4 @@
-// DUMMY CONTENT — replace with real work history before launch.
+// Work history & education from Zula's profile.
 export type ExperienceEntry = {
   company: string;
   role: string;
@@ -8,24 +8,24 @@ export type ExperienceEntry = {
 
 export const experience: ExperienceEntry[] = [
   {
-    company: "Solace",
-    role: "Lead Product Designer",
-    period: "2024 — Present",
+    company: "UX Pacific",
+    role: "UI/UX Designer",
+    period: "May 2025 — Present",
     description:
-      "First design hire. Own the product design practice end to end, from research through the design system that ships every feature.",
+      "Designing user-centered websites, apps and digital experiences for clients — from research and wireframes through polished UI, prototyping and design systems.",
   },
   {
-    company: "Fieldnote Collective",
-    role: "Product Designer",
-    period: "2023 — 2024",
+    company: "Red & White Institute",
+    role: "UI/UX & Graphic Designer",
+    period: "2024 — 2025",
     description:
-      "Designed the offline-first survey app used across two field seasons, working directly with researchers in the field to shape the sync model.",
+      "Built UI/UX and graphic design skills through hands-on projects — from wireframes and visual design to portfolio-ready case studies.",
   },
   {
-    company: "Bright Path Design Co.",
-    role: "Junior Designer (Contract)",
-    period: "2022 — 2023",
+    company: "Gujarat University",
+    role: "Bachelor of Computer Application",
+    period: "2021 — 2024",
     description:
-      "Rotated across three client engagements — e-commerce, analytics, wellness — learning how fast a design decision has to earn its keep.",
+      "Studied computer applications with a focus on software, systems and the technical foundation behind digital products.",
   },
 ];

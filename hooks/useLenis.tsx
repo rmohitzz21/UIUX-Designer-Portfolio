@@ -36,7 +36,13 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
   return (
     <ReactLenis
       root
-      options={{ autoRaf: false, smoothWheel: !reducedMotion, lerp: reducedMotion ? 1 : undefined }}
+      options={{
+        autoRaf: false,
+        smoothWheel: !reducedMotion,
+        // Slightly softer than default so wheel feel matches the Framer / Lenis reference.
+        lerp: reducedMotion ? 1 : 0.1,
+        wheelMultiplier: reducedMotion ? 1 : 0.9,
+      }}
     >
       {!reducedMotion && <LenisScrollTriggerBridge />}
       {children}

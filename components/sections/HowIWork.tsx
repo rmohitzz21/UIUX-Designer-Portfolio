@@ -6,7 +6,7 @@ import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { EASE_REVEAL } from "@/lib/motion";
 import { useContactDrawer } from "@/components/sections/ContactDrawer";
-import { pricingPlans, pricingPromo, pricingSteps } from "@/content/site";
+import { workModels, workPromo, workSteps } from "@/content/site";
 
 /** Mono-line step glyphs, drawn in the same style as the Services icons. */
 const STEP_GLYPHS: Record<string, React.ReactNode> = {
@@ -70,7 +70,7 @@ function PromoCard() {
       transition={{ duration: reducedMotion ? 0 : 0.7, ease: EASE_REVEAL }}
     >
       <span className="inline-flex rounded-full bg-bg px-4 py-2 text-sm font-medium text-text">
-        {pricingPromo.badge}
+        {workPromo.badge}
       </span>
 
       <motion.div
@@ -82,9 +82,9 @@ function PromoCard() {
       </motion.div>
 
       <p className="mt-24 text-xl leading-snug md:mt-28">
-        <span className="text-bg/55">{pricingPromo.lead}</span>
+        <span className="text-bg/55">{workPromo.lead}</span>
         <br />
-        <span className="font-semibold">{pricingPromo.emphasis}</span>
+        <span className="font-semibold">{workPromo.emphasis}</span>
       </p>
     </motion.div>
   );
@@ -98,26 +98,26 @@ function Check() {
   );
 }
 
-export function Pricing() {
+export function HowIWork() {
   const drawer = useContactDrawer();
-  const [unlimited, single] = pricingPlans;
+  const [ongoing] = workModels;
 
   return (
-    <section id="pricing" className="border-t border-line py-24 md:py-32">
+    <section id="how-i-work" className="border-t border-line py-24 md:py-32">
       <div className="section-container">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-20">
           <TextReveal
-            lines={[{ text: "Simple pricing.", muted: true }, "Standout designs."]}
+            lines={[{ text: "Simple process.", muted: true }, "Standout designs."]}
             className="text-display-lg font-display"
           />
           <Reveal as="div" className="lg:pt-4">
-            <p className="font-semibold">Clear costs, no hidden fees.</p>
-            <p className="mt-1 text-muted">Select from a monthly subscription or an individual project rate.</p>
+            <p className="font-semibold">Clear scope, no guesswork.</p>
+            <p className="mt-1 text-muted">Work with me on a rolling basis, or one project at a time.</p>
           </Reveal>
         </div>
 
         <RevealGroup className="mt-20 grid gap-10 md:grid-cols-3">
-          {pricingSteps.map((step) => (
+          {workSteps.map((step) => (
             <RevealItem key={step.title}>
               <div className="flex items-center gap-2.5">
                 <svg
@@ -150,30 +150,30 @@ export function Pricing() {
               <div className="rounded-3xl border border-line bg-surface px-7 pt-16 pb-8">
                 <span className="inline-flex items-center gap-2 rounded-full bg-bg px-3.5 py-2 text-sm">
                   <span className="h-2 w-2 rounded-full bg-secondary" />
-                  {pricingPromo.status}
+                  {workPromo.status}
                 </span>
-                <h3 className="mt-6 text-display font-display">{pricingPromo.title}</h3>
-                <p className="mt-3 text-muted">{pricingPromo.description}</p>
+                <h3 className="mt-6 text-display font-display">{workPromo.title}</h3>
+                <p className="mt-3 text-muted">{workPromo.description}</p>
               </div>
             </Reveal>
           </div>
 
           <Reveal as="div" delay={0.15}>
             <div className="rounded-3xl border border-line bg-surface p-8 md:p-10">
-              <h3 className="text-display font-display">{unlimited.name}</h3>
+              <h3 className="text-display font-display">{ongoing.name}</h3>
               <p className="mt-4">
-                {unlimited.descriptionLead} <span className="text-muted">{unlimited.descriptionRest}</span>
+                {ongoing.descriptionLead} <span className="text-muted">{ongoing.descriptionRest}</span>
               </p>
 
               <hr className="my-8 border-line" />
 
               <p className="flex items-baseline gap-2">
-                <span className="text-5xl font-semibold tracking-tight">{unlimited.price}</span>
-                <span className="text-sm text-muted">{unlimited.cadence}</span>
+                <span className="text-5xl font-semibold tracking-tight">{ongoing.stat}</span>
+                <span className="text-sm text-muted">{ongoing.statNote}</span>
               </p>
 
               <ul className="mt-8 grid gap-3 sm:grid-cols-2">
-                {unlimited.features.map((feature) => (
+                {ongoing.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-2.5 text-sm font-medium">
                     <Check />
                     {feature}
@@ -181,46 +181,19 @@ export function Pricing() {
                 ))}
               </ul>
 
-              <div className="mt-10 flex items-center gap-5">
+              <div className="mt-10">
                 <button
                   type="button"
-                  onClick={() => drawer.open("quote")}
+                  onClick={() => drawer.open("contact")}
                   className="rounded-full bg-text px-7 py-3.5 text-sm font-medium text-bg transition-opacity hover:opacity-85"
                 >
-                  {unlimited.cta}
+                  {ongoing.cta}
                 </button>
-                <span className="text-lg font-semibold text-muted/60">stripe</span>
               </div>
             </div>
           </Reveal>
         </div>
 
-        <Reveal as="div" delay={0.1} className="mt-6">
-          <div className="grid items-center gap-8 rounded-3xl bg-text p-8 text-bg md:p-10 lg:grid-cols-[1fr_1fr_auto]">
-            <div>
-              <h3 className="text-display font-display">{single.name}</h3>
-              <p className="mt-4 font-semibold">{single.descriptionLead}</p>
-              <p className="text-bg/60">{single.descriptionRest}</p>
-            </div>
-
-            <ul className="grid gap-3 sm:grid-cols-2">
-              {single.features.map((feature) => (
-                <li key={feature} className="flex items-start gap-2.5 text-sm font-medium">
-                  <Check />
-                  {feature}
-                </li>
-              ))}
-            </ul>
-
-            <button
-              type="button"
-              onClick={() => drawer.open("quote")}
-              className="justify-self-start rounded-full bg-bg px-7 py-3.5 text-sm font-medium text-text transition-opacity hover:opacity-85 lg:justify-self-end"
-            >
-              {single.cta}
-            </button>
-          </div>
-        </Reveal>
       </div>
     </section>
   );

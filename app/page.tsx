@@ -4,11 +4,12 @@ import { ProjectMorphProvider } from "@/components/motion/ProjectMorph";
 import { FeaturedQuote } from "@/components/sections/FeaturedQuote";
 import { Services } from "@/components/sections/Services";
 import { About } from "@/components/sections/About";
-import { Pricing } from "@/components/sections/Pricing";
+import { DesignProcess } from "@/components/sections/DesignProcess";
 import { TrustedBy } from "@/components/sections/TrustedBy";
 import { Testimonials } from "@/components/sections/Testimonials";
+import { OrbitGallery } from "@/components/sections/OrbitGallery";
 import { Faq } from "@/components/sections/Faq";
-import { Journal } from "@/components/sections/Journal";
+import { personalPhotos } from "@/lib/photos";
 
 export default function Home() {
   return (
@@ -20,11 +21,11 @@ export default function Home() {
       <FeaturedQuote />
       <Services />
       <About />
-      <Pricing />
+      <DesignProcess />
       <TrustedBy />
       <Testimonials />
+      <OrbitGallery photos={personalPhotos()} />
       <Faq />
-      <Journal />
     </main>
   );
 }

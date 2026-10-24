@@ -3,10 +3,12 @@ import { RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { TextReveal } from "@/components/motion/TextReveal";
 import { GridMorphSlot } from "@/components/motion/ProjectMorph";
 import { MORPH_COUNT } from "@/lib/motion";
-import { projects } from "@/content/projects";
+import { latestProjects } from "@/content/projects";
 import { ArrowUpRight } from "@/components/ui/ArrowUpRight";
 
 export function Work() {
+  const latest = latestProjects.slice(0, MORPH_COUNT);
+
   return (
     <section id="work" className="border-t border-line py-24 md:py-32">
       <div className="section-container">
@@ -15,7 +17,7 @@ export function Work() {
         {/* The covers themselves float above the page and are driven here by ProjectMorph —
             these cells only reserve the space they land in. */}
         <div className="mt-14 grid gap-x-8 gap-y-12 md:grid-cols-2">
-          {projects.slice(0, MORPH_COUNT).map((project, i) => (
+          {latest.map((project, i) => (
             <div key={project.id}>
               <GridMorphSlot index={i} className="aspect-[16/11] w-full" />
 

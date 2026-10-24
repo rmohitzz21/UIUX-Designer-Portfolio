@@ -1,7 +1,7 @@
 import { Marquee } from "@/components/motion/Marquee";
-import { trustedBy } from "@/content/site";
+import { heroSkills, trustedBy } from "@/content/site";
 
-/** Placeholder marks — no logo assets yet, so each client gets a simple geometric glyph. */
+/** Placeholder marks for client names only. */
 const MARKS = [
   <circle key="a" cx="12" cy="12" r="7" />,
   <rect key="b" x="5" y="5" width="14" height="14" rx="3" />,
@@ -11,38 +11,47 @@ const MARKS = [
   <rect key="f" x="4" y="4" width="16" height="16" rx="8" ry="4" />,
 ];
 
-function Logo({ name, index }: { name: string; index: number }) {
+function Logo({ name, index, showMark }: { name: string; index: number; showMark: boolean }) {
   return (
     <span className="mx-8 flex shrink-0 items-center gap-2.5 text-muted transition-colors duration-300 hover:text-text motion-reduce:transition-none">
-      <svg
-        viewBox="0 0 24 24"
-        className="h-5 w-5 shrink-0"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-        aria-hidden="true"
-      >
-        {MARKS[index % MARKS.length]}
-      </svg>
+      {showMark ? (
+        <svg
+          viewBox="0 0 24 24"
+          className="h-5 w-5 shrink-0"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          {MARKS[index % MARKS.length]}
+        </svg>
+      ) : null}
       <span className="text-lg font-semibold tracking-tight whitespace-nowrap">{name}</span>
     </span>
   );
 }
 
 /**
- * Continuously scrolling strip of client wordmarks. Pauses on hover, and the edges fade out
- * so logos slide in and out rather than popping at a hard boundary.
+ * Continuously scrolling strip. Pauses on hover, and the edges fade out
+ * so items slide in and out rather than popping at a hard boundary.
  */
 export function ClientLogos({
   className,
   duration = 32,
   reverse = false,
+  variant = "clients",
 }: {
   className?: string;
   duration?: number;
   reverse?: boolean;
+  /** Hero shows skills; TrustedBy keeps client names. */
+  variant?: "clients" | "skills";
 }) {
+  const items = variant === "skills" ? heroSkills : trustedBy;
+  const label = variant === "skills" ? "Design skills and services" : "Selected clients";
+  const showMark = variant === "clients";
+
   return (
     <div
       className={className}
@@ -50,11 +59,11 @@ export function ClientLogos({
         maskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
         WebkitMaskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
       }}
-      aria-label="Selected clients"
+      aria-label={label}
     >
       <Marquee duration={duration} reverse={reverse}>
-        {trustedBy.map((name, i) => (
-          <Logo key={name} name={name} index={i} />
+        {items.map((name, i) => (
+          <Logo key={name} name={name} index={i} showMark={showMark} />
         ))}
       </Marquee>
     </div>

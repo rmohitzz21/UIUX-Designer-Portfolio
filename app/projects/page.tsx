@@ -4,11 +4,11 @@ import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { CtaCard } from "@/components/sections/CtaCard";
 import { TrustedBy } from "@/components/sections/TrustedBy";
-import { projects } from "@/content/projects";
+import { latestProjects } from "@/content/projects";
 
 export const metadata: Metadata = {
   title: "Projects",
-  description: "Selected product design work — case studies across fintech, health and developer tools.",
+  description: "Selected product and visual design work from Dribbble and Behance — apps, dashboards, websites and identity.",
 };
 
 export default function ProjectsPage() {
@@ -32,7 +32,7 @@ export default function ProjectsPage() {
       <section className="border-t border-line py-24 md:py-32">
         <div className="section-container">
           <RevealGroup className="grid gap-x-8 gap-y-12 md:grid-cols-2">
-            {projects.map((project) => (
+            {latestProjects.map((project) => (
               <RevealItem key={project.id}>
                 <ProjectCard project={project} />
               </RevealItem>

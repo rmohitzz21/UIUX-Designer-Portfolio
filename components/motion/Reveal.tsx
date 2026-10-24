@@ -1,10 +1,14 @@
 "use client";
 
+import { useSyncExternalStore } from "react";
 import { motion, type Variants } from "framer-motion";
 import { EASE_REVEAL, STAGGER } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
-// Matches TextReveal: rise out of a soft blur, so blocks and headings share one motion language.
+const subscribe = () => () => {};
+const getClientSnapshot = () => true;
+const getServerSnapshot = () => false;
+
 const variants: Variants = {
   hidden: (distance: number) => ({ opacity: 0, y: distance, filter: "blur(5px)" }),
   visible: { opacity: 1, y: 0, filter: "blur(0px)" },
@@ -30,21 +34,24 @@ export function Reveal({
   as = "div",
 }: RevealProps) {
   const reducedMotion = useReducedMotion();
+  const mounted = useSyncExternalStore(subscribe, getClientSnapshot, getServerSnapshot);
   const Component = motion[as];
 
-  if (reducedMotion) {
-    return <Component className={className}>{children}</Component>;
-  }
+  const canAnimate = mounted && !reducedMotion;
 
   return (
     <Component
       className={className}
-      variants={variants}
+      variants={canAnimate ? variants : undefined}
       custom={distance}
-      initial="hidden"
-      whileInView="visible"
+      initial={canAnimate ? "hidden" : false}
+      whileInView={canAnimate ? "visible" : undefined}
       viewport={{ once: true, margin: "-10% 0px" }}
-      transition={{ duration, ease: EASE_REVEAL, delay }}
+      transition={{
+        duration: canAnimate ? duration : 0,
+        ease: EASE_REVEAL,
+        delay: canAnimate ? delay : 0,
+      }}
     >
       {children}
     </Component>
@@ -54,18 +61,17 @@ export function Reveal({
 /** A single item inside a RevealGroup — inherits the "hidden"/"visible" trigger from its parent. */
 export function RevealItem({ children, className, distance = 12, as = "div" }: Omit<RevealProps, "delay">) {
   const reducedMotion = useReducedMotion();
+  const mounted = useSyncExternalStore(subscribe, getClientSnapshot, getServerSnapshot);
   const Component = motion[as];
 
-  if (reducedMotion) {
-    return <Component className={className}>{children}</Component>;
-  }
+  const canAnimate = mounted && !reducedMotion;
 
   return (
     <Component
       className={className}
-      variants={variants}
+      variants={canAnimate ? variants : undefined}
       custom={distance}
-      transition={{ duration: 0.6, ease: EASE_REVEAL }}
+      transition={{ duration: canAnimate ? 0.6 : 0, ease: EASE_REVEAL }}
     >
       {children}
     </Component>
@@ -83,18 +89,17 @@ export function RevealGroup({
   stagger?: number;
 }) {
   const reducedMotion = useReducedMotion();
+  const mounted = useSyncExternalStore(subscribe, getClientSnapshot, getServerSnapshot);
 
-  if (reducedMotion) {
-    return <div className={className}>{children}</div>;
-  }
+  const canAnimate = mounted && !reducedMotion;
 
   return (
     <motion.div
       className={className}
-      initial="hidden"
-      whileInView="visible"
+      initial={canAnimate ? "hidden" : false}
+      whileInView={canAnimate ? "visible" : undefined}
       viewport={{ once: true, margin: "-10% 0px" }}
-      transition={{ staggerChildren: stagger }}
+      transition={{ staggerChildren: canAnimate ? stagger : 0 }}
     >
       {children}
     </motion.div>

@@ -103,12 +103,12 @@ function DiscoveryCard() {
       transition={reducedMotion ? { duration: 0 } : { duration: 0.95, ease: EASE_REVEAL }}
     >
       <span className="relative block h-16 w-16 overflow-hidden rounded-full bg-bg">
-        <Image src={site.photo} alt="" fill sizes="64px" className="object-cover" />
+        <Image src={site.photo} alt="" fill sizes="64px" className="object-cover object-[70%_18%]" />
       </span>
 
       <p className="mt-8 text-display font-display">
-        <span className="block text-muted">Still not sure?</span>
-        <span className="block">Book a free discovery call.</span>
+        <span className="block text-muted">Have a project in mind?</span>
+        <span className="block">Let&apos;s talk about it.</span>
       </p>
 
       <p className="mt-4 max-w-sm text-muted">{site.contactSubtext}</p>
@@ -116,7 +116,7 @@ function DiscoveryCard() {
       <div className="mt-8 flex flex-wrap items-center gap-5">
         <a
           href={`mailto:${site.email}`}
-          className="inline-flex items-center gap-2.5 rounded-full bg-text px-6 py-3.5 text-sm font-medium text-bg transition-opacity hover:opacity-85"
+          className="btn-hover inline-flex items-center gap-2.5 rounded-full bg-text px-6 py-3.5 text-sm font-medium text-bg transition-all hover:opacity-85 active:scale-[0.98]"
         >
           <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
             <rect x="3" y="5" width="18" height="16" rx="3" />

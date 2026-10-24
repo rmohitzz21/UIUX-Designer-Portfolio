@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { site, navLinks, about } from "@/content/site";
@@ -8,6 +8,10 @@ import { useLenis } from "@/hooks/useLenis";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { EASE_REVEAL } from "@/lib/motion";
 import { useContactDrawer } from "@/components/sections/ContactDrawer";
+
+const subscribe = () => () => {};
+const getClientSnapshot = () => true;
+const getServerSnapshot = () => false;
 
 function Avatar({ size = 32 }: { size?: number }) {
   return (
@@ -24,6 +28,7 @@ function Avatar({ size = 32 }: { size?: number }) {
 export function Nav() {
   const [collapsed, setCollapsed] = useState(false);
   const [open, setOpen] = useState(false);
+  const mounted = useSyncExternalStore(subscribe, getClientSnapshot, getServerSnapshot);
   const reducedMotion = useReducedMotion();
   const lenis = useLenis();
   const isHome = usePathname() === "/";
@@ -73,8 +78,8 @@ export function Nav() {
     <>
       <header className="pointer-events-none fixed inset-x-0 top-4 z-50 flex justify-center px-4 md:top-6">
         <motion.div
-          layout={!reducedMotion}
-          transition={reducedMotion ? { duration: 0 } : { duration: 0.5, ease: EASE_REVEAL }}
+          layout={mounted && !reducedMotion}
+          transition={reducedMotion || !mounted ? { duration: 0 } : { duration: 0.5, ease: EASE_REVEAL }}
           className="nav-glass pointer-events-auto flex items-center gap-3 p-3 md:gap-6"
         >
           <a href={hrefFor("#top")} className="flex shrink-0 items-center gap-2.5 pl-1">

@@ -82,7 +82,7 @@ export function Services() {
                         title={tool.name}
                         className="flex h-10 w-10 items-center justify-center rounded-xl border border-line bg-surface p-2 shadow-sm transition-transform duration-300 hover:-translate-y-0.5 motion-reduce:transition-none"
                       >
-                        <Logo />
+                        {Logo ? <Logo /> : null}
                         <span className="sr-only">{tool.name}</span>
                       </span>
                     </RevealItem>

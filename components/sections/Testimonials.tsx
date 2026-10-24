@@ -1,7 +1,5 @@
-import Image from "next/image";
 import { TextReveal } from "@/components/motion/TextReveal";
-import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
-import { SocialProof } from "@/components/ui/SocialProof";
+import { RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { testimonials, type Testimonial } from "@/content/testimonials";
 
 function QuoteMark() {
@@ -34,15 +32,10 @@ export function Testimonials() {
   return (
     <section className="border-t border-line py-24 md:py-32">
       <div className="section-container">
-        <div className="flex flex-wrap items-end justify-between gap-8">
-          <TextReveal
-            lines={[{ text: "Hear from what my", muted: true }, "clients have to say."]}
-            className="text-display-lg font-display"
-          />
-          <Reveal as="div" delay={0.15} className="pb-2">
-            <SocialProof />
-          </Reveal>
-        </div>
+        <TextReveal
+          lines={[{ text: "Hear from what my", muted: true }, "clients have to say."]}
+          className="text-display-lg font-display"
+        />
 
         <RevealGroup className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((t) => (
@@ -54,15 +47,10 @@ export function Testimonials() {
                   <Quote testimonial={t} />
                 </blockquote>
 
-                <figcaption className="mt-8 flex items-center gap-3">
-                  <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full bg-bg">
-                    <Image src={t.photo} alt="" fill sizes="44px" className="object-cover" />
-                  </span>
-                  <span>
-                    <span className="block text-sm font-semibold">{t.name}</span>
-                    <span className="block text-sm text-muted">
-                      {t.role} at {t.company}
-                    </span>
+                <figcaption className="mt-8">
+                  <span className="block text-sm font-semibold">{t.name}</span>
+                  <span className="block text-sm text-muted">
+                    {t.role} at {t.company}
                   </span>
                 </figcaption>
               </figure>

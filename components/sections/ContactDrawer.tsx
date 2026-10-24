@@ -111,7 +111,7 @@ export function ContactDrawerProvider({ children }: { children: ReactNode }) {
 
               <div className="mt-8 flex items-center gap-3">
                 <span className="relative block h-11 w-11 shrink-0 overflow-hidden rounded-full bg-bg">
-                  <Image src={site.photo} alt="" fill sizes="44px" className="object-cover" />
+                  <Image src={site.photo} alt="" fill sizes="44px" className="object-cover object-[70%_18%]" />
                 </span>
                 <span>
                   <span className="block font-semibold">{site.name}</span>
@@ -121,9 +121,13 @@ export function ContactDrawerProvider({ children }: { children: ReactNode }) {
 
               {sent ? (
                 <div className="mt-10 rounded-2xl border border-line bg-bg p-6">
-                  <p className="font-semibold">Thanks — that&apos;s with me.</p>
+                  <p className="font-semibold">Your email client should be open.</p>
                   <p className="mt-1 text-sm text-muted">
-                    I reply to everything personally, usually within a day.
+                    Hit send and it reaches me directly — or write to{" "}
+                    <a href={`mailto:${site.email}`} className="font-semibold text-text underline-offset-4 hover:underline">
+                      {site.email}
+                    </a>
+                    . I reply to everything personally, usually within a day.
                   </p>
                 </div>
               ) : (
@@ -131,7 +135,20 @@ export function ContactDrawerProvider({ children }: { children: ReactNode }) {
                   className="mt-8 flex flex-col gap-5"
                   onSubmit={(e) => {
                     e.preventDefault();
-                    // No backend yet — wire this to your form handler before launch.
+                    // ponytail: no backend — hand the enquiry to the visitor's mail client so
+                    // nothing is silently dropped. Swap for a POST to Resend/Formspree if you
+                    // want it to land in the inbox without leaving the page.
+                    const data = new FormData(e.currentTarget);
+                    const body = [
+                      `Name: ${data.get("name")}`,
+                      `Email: ${data.get("email")}`,
+                      `Budget: ${data.get("budget") || "Not specified"}`,
+                      "",
+                      String(data.get("message") || ""),
+                    ].join("\n");
+                    window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(
+                      `${copy.title} — ${data.get("name")}`,
+                    )}&body=${encodeURIComponent(body)}`;
                     setSent(true);
                   }}
                 >
@@ -175,10 +192,7 @@ export function ContactDrawerProvider({ children }: { children: ReactNode }) {
               )}
 
               <p className="mt-8 text-xs text-muted">
-                By submitting this form, you agree to the{" "}
-                <a href="#privacy" className="font-semibold text-text underline-offset-4 hover:underline">
-                  Privacy Policy.
-                </a>
+                Your details are only used to reply to this enquiry.
               </p>
             </motion.aside>
           </>

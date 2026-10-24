@@ -13,7 +13,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { projects } from "@/content/projects";
+import { latestProjects } from "@/content/projects";
 import { MORPH_COUNT } from "@/lib/motion";
 
 /** Where each card sits inside the hero cluster, as a fraction of the slot, plus its tilt. */
@@ -183,7 +183,7 @@ export function ProjectMorphProvider({ children }: { children: ReactNode }) {
         {children}
 
         <div className="pointer-events-none absolute inset-0 z-20" aria-hidden={!ready}>
-          {projects.slice(0, MORPH_COUNT).map((project, i) => (
+          {latestProjects.slice(0, MORPH_COUNT).map((project, i) => (
             <Link
               key={project.id}
               href={`/projects/${project.id}`}

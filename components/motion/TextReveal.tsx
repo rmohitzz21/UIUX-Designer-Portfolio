@@ -1,7 +1,12 @@
 "use client";
 
+import { useSyncExternalStore } from "react";
 import { motion } from "framer-motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+
+const subscribe = () => () => {};
+const getClientSnapshot = () => true;
+const getServerSnapshot = () => false;
 
 /** A line is either plain text, or text flagged `muted` to render in grey. */
 export type RevealLine = string | { text: string; muted?: boolean };
@@ -19,20 +24,30 @@ type TextRevealProps = {
   inline?: boolean;
 };
 
-// Measured off the reference: words rise 10px, un-blur from 5px, over ~0.6s with a ~45ms stagger.
 const DURATION = 0.6;
 const STAGGER = 0.045;
 const EASE = [0.16, 1, 0.3, 1] as const;
-const HIDDEN = { opacity: 0, y: 10, filter: "blur(5px)" };
-const SHOWN = { opacity: 1, y: 0, filter: "blur(0px)" };
 
 function toLine(line: RevealLine) {
   return typeof line === "string" ? { text: line, muted: false } : { text: line.text, muted: !!line.muted };
 }
 
+function computeLinesWithOffsets(lines: readonly RevealLine[]) {
+  const parsed = lines.map(toLine);
+  let offset = 0;
+  return parsed.map((line) => {
+    const words = line.text.split(" ");
+    const startOffset = offset;
+    offset += words.length;
+    return { ...line, words, startOffset };
+  });
+}
+
 /**
  * Word-by-word entrance: each word fades up out of a soft blur, staggered across the block.
  * Lines marked `muted` stay grey — the reference uses that to de-emphasise part of a headline.
+ *
+ * Animations start only after mount so SSR HTML matches the first client paint (no hydration mismatch).
  */
 export function TextReveal({
   lines,
@@ -43,53 +58,47 @@ export function TextReveal({
   inline = false,
 }: TextRevealProps) {
   const reducedMotion = useReducedMotion();
+  const mounted = useSyncExternalStore(subscribe, getClientSnapshot, getServerSnapshot);
   const Component = motion[as];
-  const parsed = lines.map(toLine);
   const lineDisplay = inline ? "inline" : "block";
+  const linesWithOffsets = computeLinesWithOffsets(lines);
 
-  if (reducedMotion) {
-    return (
-      <Component className={className}>
-        {parsed.map((line, i) => (
-          <span key={i} className={`${lineDisplay} ${line.muted ? "text-muted" : ""}`}>
-            {line.text}
-            {inline && i < parsed.length - 1 ? " " : ""}
-          </span>
-        ))}
-      </Component>
-    );
-  }
+  const canAnimate = mounted && !reducedMotion;
+  const animateProps = !canAnimate
+    ? { initial: false as const }
+    : immediate
+      ? { initial: "hidden" as const, animate: "shown" as const }
+      : {
+          initial: "hidden" as const,
+          whileInView: "shown" as const,
+          viewport: { once: true, margin: "-12% 0px -12% 0px" },
+        };
 
-  const animateProps = immediate
-    ? { animate: "shown" as const }
-    : { whileInView: "shown" as const, viewport: { once: true, margin: "-12% 0px -12% 0px" } };
-
-  let wordIndex = 0;
+  const hidden = { opacity: 0, y: 10, filter: "blur(5px)" };
+  const shown = { opacity: 1, y: 0, filter: "blur(0px)" };
 
   return (
-    <Component className={className} initial="hidden" {...animateProps}>
-      {parsed.map((line, li) => {
-        const words = line.text.split(" ");
-        return (
-          <span key={li} className={`${lineDisplay} ${line.muted ? "text-muted" : ""}`}>
-            {words.map((word, wi) => {
-              const i = wordIndex++;
-              return (
-                <span key={wi} className="inline-block whitespace-pre">
-                  <motion.span
-                    className="inline-block"
-                    variants={{ hidden: HIDDEN, shown: SHOWN }}
-                    transition={{ duration: DURATION, ease: EASE, delay: delay + i * STAGGER }}
-                  >
-                    {word}
-                    {wi < words.length - 1 || (inline && li < parsed.length - 1) ? " " : ""}
-                  </motion.span>
-                </span>
-              );
-            })}
-          </span>
-        );
-      })}
+    <Component className={className} {...animateProps}>
+      {linesWithOffsets.map((line, li) => (
+        <span key={li} className={`${lineDisplay} ${line.muted ? "text-muted" : ""}`}>
+          {line.words.map((word, wi) => (
+            <span key={wi} className="inline-block whitespace-pre">
+              <motion.span
+                className="inline-block"
+                variants={canAnimate ? { hidden, shown } : undefined}
+                transition={{
+                  duration: canAnimate ? DURATION : 0,
+                  ease: EASE,
+                  delay: canAnimate ? delay + (line.startOffset + wi) * STAGGER : 0,
+                }}
+              >
+                {word}
+                {wi < line.words.length - 1 || (inline && li < linesWithOffsets.length - 1) ? " " : ""}
+              </motion.span>
+            </span>
+          ))}
+        </span>
+      ))}
     </Component>
   );
 }

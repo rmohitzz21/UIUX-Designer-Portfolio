@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "sync:photos": "node -e \"const fs=require('fs');fs.rmSync('public/personal',{recursive:true,force:true});fs.cpSync('img','public/personal',{recursive:true})\"",
+    "predev": "npm run sync:photos",
+    "prebuild": "npm run sync:photos",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

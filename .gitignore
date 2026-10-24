@@ -8,3 +8,5 @@ build/
 *.log
 .turbo/
 next-env.d.ts
+# generated from img/ by npm run sync:photos
+public/personal/

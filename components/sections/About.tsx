@@ -2,20 +2,7 @@ import Image from "next/image";
 import { TextReveal } from "@/components/motion/TextReveal";
 import { Reveal } from "@/components/motion/Reveal";
 import { WorkHistory } from "@/components/sections/WorkHistory";
-import {
-  BehanceLogo,
-  DribbbleLogo,
-  InstagramLogo,
-  LinkedinLogo,
-} from "@/components/ui/BrandIcons";
 import { about, site } from "@/content/site";
-
-const SOCIALS = [
-  { label: "Instagram", href: site.socials.instagram, Icon: InstagramLogo },
-  { label: "Dribbble", href: site.socials.dribbble, Icon: DribbbleLogo },
-  { label: "Behance", href: site.socials.behance, Icon: BehanceLogo },
-  { label: "LinkedIn", href: site.socials.linkedin, Icon: LinkedinLogo },
-] as const;
 
 export function About() {
   return (
@@ -35,24 +22,9 @@ export function About() {
                   alt={`${site.name}, ${site.role}`}
                   fill
                   sizes="(min-width: 1024px) 24rem, 100vw"
-                  className="object-cover"
+                  className="object-cover object-[70%_20%]"
                   priority={false}
                 />
-              </div>
-
-              <div className="absolute right-4 bottom-4 flex items-center gap-1.5">
-                {SOCIALS.map((social) => (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={social.label}
-                    className="flex h-9 w-9 items-center justify-center rounded-full bg-text/60 p-2 text-bg backdrop-blur-sm transition-colors hover:bg-text"
-                  >
-                    <social.Icon />
-                  </a>
-                ))}
               </div>
             </Reveal>
 

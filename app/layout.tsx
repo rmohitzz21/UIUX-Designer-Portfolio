@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { Mrs_Saint_Delafield } from "next/font/google";
+import { Instrument_Sans, Mrs_Saint_Delafield } from "next/font/google";
 import { SmoothScrollProvider } from "@/hooks/useLenis";
 import { Nav } from "@/components/sections/Nav";
 import { Footer } from "@/components/sections/Footer";
 import { ContactDrawerProvider } from "@/components/sections/ContactDrawer";
+import { CustomCursor } from "@/components/motion/CustomCursor";
 import { site } from "@/content/site";
 import "@/styles/globals.css";
 
@@ -12,6 +13,12 @@ const signature = Mrs_Saint_Delafield({
   variable: "--font-signature",
   subsets: ["latin"],
   weight: "400",
+});
+
+/** Used only for the orbit gallery caption. */
+const instrument = Instrument_Sans({
+  variable: "--font-instrument",
+  subsets: ["latin"],
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zulaprajapati.design";
@@ -44,7 +51,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     // Lenis adds classes to <html> after mount, which React otherwise reports as a
     // hydration attribute mismatch on the root element.
-    <html lang="en" className={`${signature.variable} h-full antialiased`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${signature.variable} ${instrument.variable} h-full antialiased`}
+      suppressHydrationWarning
+    >
       <head>
         <link rel="preconnect" href="https://api.fontshare.com" />
         <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="" />
@@ -61,6 +72,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 
         <SmoothScrollProvider>
           <ContactDrawerProvider>
+            <CustomCursor />
             <Nav />
             {children}
             <Footer />

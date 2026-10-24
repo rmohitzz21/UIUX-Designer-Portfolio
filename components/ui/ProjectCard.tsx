@@ -13,6 +13,7 @@ export function ProjectCard({ project }: { project: Project }) {
       <div className="relative overflow-hidden rounded-2xl border border-line bg-surface">
         <span className="relative block aspect-[16/11] w-full">
           <Image
+            suppressHydrationWarning
             src={project.image}
             alt=""
             fill

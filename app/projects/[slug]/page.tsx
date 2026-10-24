@@ -28,18 +28,14 @@ export default async function CaseStudyPage(props: PageProps<"/projects/[slug]">
   const project = projects.find((p) => p.id === slug);
   if (!project) notFound();
 
+  const shots = [project.image, ...(project.gallery ?? [])].filter(
+    (src, i, all) => all.indexOf(src) === i,
+  );
   const others = projects.filter((p) => p.id !== project.id).slice(0, 2);
-
-  // Image + caption blocks, built from the case study's own narrative.
-  const blocks = [
-    { caption: ["Where it started.", ""], body: project.problem, layout: "pair" as const },
-    { caption: ["How it came together.", ""], body: project.process, layout: "wide" as const },
-    { caption: ["What changed.", ""], body: project.outcome, layout: "pair" as const },
-  ];
 
   return (
     <main id="top" className="relative z-10 flex flex-1 flex-col">
-      <section className="pt-36 pb-16 md:pt-44">
+      <section className="pt-36 pb-12 md:pt-44">
         <div className="section-container">
           <div className="max-w-3xl">
             <TextReveal
@@ -50,110 +46,45 @@ export default async function CaseStudyPage(props: PageProps<"/projects/[slug]">
               immediate
             />
 
-            <Reveal as="div" delay={0.3} className="mt-8 flex flex-wrap gap-x-10 gap-y-3 text-sm">
-              <span>
-                <span className="text-muted">Client</span> <span className="font-semibold">{project.title}</span>
-              </span>
-              <span>
-                <span className="text-muted">Year</span> <span className="font-semibold">{project.year}</span>
-              </span>
-              <span>
-                <span className="text-muted">Role</span> <span className="font-semibold">{project.role}</span>
-              </span>
-              <span>
-                <span className="text-muted">Timeline</span>{" "}
-                <span className="font-semibold">{project.timeline}</span>
-              </span>
-            </Reveal>
-
-            <Reveal as="p" delay={0.35} className="mt-10 text-lg leading-relaxed">
+            <Reveal as="p" delay={0.3} className="mt-8 text-lg leading-relaxed text-muted">
               {project.summary}
             </Reveal>
 
-            <div className="mt-10">
-              <p className="text-sm text-muted">Scope of work</p>
-              <RevealGroup className="mt-3 flex flex-wrap gap-2.5">
-                {[...project.tags, ...project.tools].map((tag) => (
-                  <RevealItem key={tag}>
-                    <span className="inline-flex rounded-full border border-line bg-surface px-4 py-2 text-sm font-medium">
-                      {tag}
-                    </span>
-                  </RevealItem>
+            {project.links.length > 0 && (
+              <Reveal as="div" delay={0.4} className="mt-8 flex flex-wrap gap-x-8 gap-y-3">
+                {project.links.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group inline-flex items-center gap-2 text-lg font-medium"
+                  >
+                    {link.label}
+                    <ArrowUpRight className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none" />
+                  </a>
                 ))}
-              </RevealGroup>
-            </div>
-
-            {project.links[0] && (
-              <Reveal as="div" delay={0.15} className="mt-10">
-                <a
-                  href={project.links[0].href}
-                  className="group inline-flex items-center gap-2 text-lg font-medium"
-                >
-                  {project.links[0].label}
-                  <ArrowUpRight className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none" />
-                </a>
               </Reveal>
             )}
           </div>
         </div>
       </section>
 
-      <section className="pb-8">
+      <section className="pb-16 md:pb-24">
         <div className="section-container">
-          <Reveal as="div">
-            <span className="relative block aspect-[16/9] w-full overflow-hidden rounded-2xl border border-line">
-              <Image src={project.image} alt="" fill sizes="(min-width: 1280px) 62rem, 100vw" className="object-cover" priority />
-            </span>
-          </Reveal>
-        </div>
-      </section>
-
-      {blocks.map((block, i) => (
-        <section key={i} className="py-16 md:py-20">
-          <div className="section-container">
-            {block.layout === "pair" ? (
-              <RevealGroup className="grid gap-6 sm:grid-cols-2">
-                <RevealItem>
-                  <span className="relative block aspect-square w-full overflow-hidden rounded-2xl border border-line">
-                    <Image src={project.image} alt="" fill sizes="(min-width: 640px) 30rem, 100vw" className="object-cover object-left" />
-                  </span>
-                </RevealItem>
-                <RevealItem>
-                  <span className="relative block aspect-square w-full overflow-hidden rounded-2xl border border-line">
-                    <Image src={project.image} alt="" fill sizes="(min-width: 640px) 30rem, 100vw" className="object-cover object-right" />
-                  </span>
-                </RevealItem>
-              </RevealGroup>
-            ) : (
-              <Reveal as="div">
+          <RevealGroup className="flex flex-col gap-6">
+            {shots.map((src, i) => (
+              <RevealItem key={src}>
                 <span className="relative block aspect-[16/9] w-full overflow-hidden rounded-2xl border border-line">
-                  <Image src={project.image} alt="" fill sizes="(min-width: 1280px) 62rem, 100vw" className="object-cover" />
+                  <Image
+                    src={src}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1280px) 62rem, 100vw"
+                    className="object-cover"
+                    priority={i === 0}
+                  />
                 </span>
-              </Reveal>
-            )}
-
-            <div className="mt-12 max-w-3xl">
-              <TextReveal as="h2" lines={[block.caption[0]]} className="text-display font-display" />
-              <Reveal as="p" delay={0.1} className="mt-5 text-lg leading-relaxed text-muted">
-                {block.body}
-              </Reveal>
-            </div>
-          </div>
-        </section>
-      ))}
-
-      <section className="border-t border-line py-24 md:py-32">
-        <div className="section-container">
-          <TextReveal
-            as="h2"
-            lines={[{ text: "By the", muted: true }, "numbers."]}
-            className="text-display-lg font-display"
-          />
-          <RevealGroup className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-            {project.metrics.map((metric) => (
-              <RevealItem key={metric.label}>
-                <p className="text-4xl font-semibold tracking-tight">{metric.value}</p>
-                <p className="mt-2 text-sm text-muted">{metric.label}</p>
               </RevealItem>
             ))}
           </RevealGroup>
